@@ -64,12 +64,12 @@ BIND9 will handle most of these steps, but you will still have to generate a new
    > Remember that your filename will be different! Do not simply copy and paste Kmytld.+008+26734 later in the lab!
 
    ```
-   root@soa:/etc/bind/keys# cat Kgrp7.<lab_domain>.te-labs.training.+008+26734.key 
-   ; This is a zone-signing key, keyid 26734, for grp7.<lab_domain>.te-labs.training.
+   root@soa:/etc/bind/keys# cat Kgrp7.dnsme.te-labs.training.+008+26734.key 
+   ; This is a zone-signing key, keyid 26734, for grp7.dnsme.te-labs.training.
    ; Created: 20221103220010 (Thu Nov  3 22:00:10 2022)
    ; Publish: 20221103220010 (Thu Nov  3 22:00:10 2022)
    ; Activate: 20221103220010 (Thu Nov  3 22:00:10 2022)
-   grp7.<lab_domain>.te-labs.training. IN DNSKEY 256 3 8 AwEAAadehqG2E23DsA4MnHcaeTH/bKTHlLftvUKR9i8lVbvWNTydacdQ MsZJPTTFZ7He7FdSmxAxImc/FEGNnk9VRr3FfzfJKbc+s6r17PLWn1bO sUxawKZogOvISPytMcWnhbj8Trs8KOoAekB1PRaiPGsCP/nj68ufvrzl x2AcfDJAWPynNDjgHxeFygifVlM6iYuzmPlpcMAY5LCIS/B1MrfashJh wtj0dldgqJSp6yZHaP8vcrMa6+s5McQcqRpyoR2rpNpl6PiOUBtjE0Ho nwg17YzSaBAbhLdmQhC4MWL/aNi7p1ybw7SVb8uZqL5k26QlKRNH2eB8YRRtq+B9rIs=
+   grp7.dnsme.te-labs.training. IN DNSKEY 256 3 8 AwEAAadehqG2E23DsA4MnHcaeTH/bKTHlLftvUKR9i8lVbvWNTydacdQ MsZJPTTFZ7He7FdSmxAxImc/FEGNnk9VRr3FfzfJKbc+s6r17PLWn1bO sUxawKZogOvISPytMcWnhbj8Trs8KOoAekB1PRaiPGsCP/nj68ufvrzl x2AcfDJAWPynNDjgHxeFygifVlM6iYuzmPlpcMAY5LCIS/B1MrfashJh wtj0dldgqJSp6yZHaP8vcrMa6+s5McQcqRpyoR2rpNpl6PiOUBtjE0Ho nwg17YzSaBAbhLdmQhC4MWL/aNi7p1ybw7SVb8uZqL5k26QlKRNH2eB8YRRtq+B9rIs=
    root@soa:/etc/bind/keys# 
    ```
 
@@ -78,23 +78,23 @@ BIND9 will handle most of these steps, but you will still have to generate a new
 2. Use the `dnssec-settime` command, to set an “*inactive*” time and a “*delete*” time for this key. These parameters are required by BIND9 to manage the ZSK rollover. In the below example, we use "**+10mi**” to mean “ten minutes from now” and "**+30mi**” to mean “thirty minutes from now”. The change on the timers will be recorded in the key file itself. In the real world you would probably use much longer timers.
 
 ```
-root@soa:/etc/bind/keys# sudo dnssec-settime -I +10mi -D +30mi Kgrp7.<lab_domain>.te-labs.training.+008+26734
-./Kgrp7.<lab_domain>.te-labs.training.+008+26734.key
-./Kgrp7.<lab_domain>.te-labs.training.+008+26734.private
+root@soa:/etc/bind/keys# sudo dnssec-settime -I +10mi -D +30mi Kgrp7.dnsme.te-labs.training.+008+26734
+./Kgrp7.dnsme.te-labs.training.+008+26734.key
+./Kgrp7.dnsme.te-labs.training.+008+26734.private
 root@soa:/etc/bind/keys#
 ```
 
 You will see two new lines ("Inactive" and "Delete") that appear in the key file.
 
 ```
-root@soa:/etc/bind/keys# cat Kgrp7.<lab_domain>.te-labs.training.+008+26734.key 
-; This is a zone-signing key, keyid 26734, for grp7.<lab_domain>.te-labs.training.
+root@soa:/etc/bind/keys# cat Kgrp7.dnsme.te-labs.training.+008+26734.key 
+; This is a zone-signing key, keyid 26734, for grp7.dnsme.te-labs.training.
 ; Created: 20221103220010 (Thu Nov  3 22:00:10 2022)
 ; Publish: 20221103220010 (Thu Nov  3 22:00:10 2022)
 ; Activate: 20221103220010 (Thu Nov  3 22:00:10 2022)
 ; Inactive: 20221104163455 (Fri Nov  4 16:34:55 2022)
 ; Delete: 20221104165455 (Fri Nov  4 16:54:55 2022)
-grp7.<lab_domain>.te-labs.training. IN DNSKEY 256 3 8 AwEAAadehqG2E23DsA4MnHcaeTH/bKTHlLftvUKR9i8lVbvWNTydacdQ MsZJPTTFZ7He7FdSmxAxImc/FEGNnk9VRr3FfzfJKbc+s6r17PLWn1bO sUxawKZogOvISPytMcWnhbj8Trs8KOoAekB1PRaiPGsCP/nj68ufvrzl x2AcfDJAWPynNDjgHxeFygifVlM6iYuzmPlpcMAY5LCIS/B1MrfashJh wtj0dldgqJSp6yZHaP8vcrMa6+s5McQcqRpyoR2rpNpl6PiOUBtjE0Ho nwg17YzSaBAbhLdmQhC4MWL/aNi7p1ybw7SVb8uZqL5k26QlKRNH2eB8 YRRtq+B9rIs=
+grp7.dnsme.te-labs.training. IN DNSKEY 256 3 8 AwEAAadehqG2E23DsA4MnHcaeTH/bKTHlLftvUKR9i8lVbvWNTydacdQ MsZJPTTFZ7He7FdSmxAxImc/FEGNnk9VRr3FfzfJKbc+s6r17PLWn1bO sUxawKZogOvISPytMcWnhbj8Trs8KOoAekB1PRaiPGsCP/nj68ufvrzl x2AcfDJAWPynNDjgHxeFygifVlM6iYuzmPlpcMAY5LCIS/B1MrfashJh wtj0dldgqJSp6yZHaP8vcrMa6+s5McQcqRpyoR2rpNpl6PiOUBtjE0Ho nwg17YzSaBAbhLdmQhC4MWL/aNi7p1ybw7SVb8uZqL5k26QlKRNH2eB8 YRRtq+B9rIs=
 root@soa:/etc/bind/keys# 
 ```
 
@@ -107,12 +107,12 @@ We do not need to specify the full set of parameters (algorithm name, key size, 
 Use the **-i** option to specify a much shorter pre-publication interval than normal, to be compatible with the very short timers used in previous one.
 
 ```
-root@soa:/etc/bind/keys# dnssec-keygen -S Kgrp7.<lab_domain>.te-labs.training.+008+26734 -i5mi
+root@soa:/etc/bind/keys# dnssec-keygen -S Kgrp7.dnsme.te-labs.training.+008+26734 -i5mi
 Generating key pair............+++++ ..............................+++++ 
-Kgrp7.<lab_domain>.te-labs.training.+008+12969
+Kgrp7.dnsme.te-labs.training.+008+12969
 root@soa:/etc/bind/keys# 
 root@soa:/etc/bind/keys# chown -R bind:bind /etc/bind/keys
-root@soa:/etc/bind/keys# rndc loadkeys grp7.<lab_domain>.te-labs.training
+root@soa:/etc/bind/keys# rndc loadkeys grp7.dnsme.te-labs.training
 root@soa:/etc/bind/keys#
 ```
 
@@ -122,40 +122,40 @@ Here we summarize the serie of events.
 
 ```
 root@soa:/etc/bind/keys# grep named /var/log/syslog
-Nov  4 15:15:51 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): next key event: 04-Nov-2022 16:15:51.577
-Nov  4 16:15:51 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): reconfiguring zone keys
-Nov  4 16:15:51 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): next key event: 04-Nov-2022 17:15:51.580
-Nov  4 16:26:23 soa named[1186]: received control channel command 'loadkeys grp7.<lab_domain>.te-labs.training'
-Nov  4 16:26:23 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): reconfiguring zone keys
-Nov  4 16:26:23 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): next key event: 04-Nov-2022 16:29:55.905
-Nov  4 16:29:55 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): reconfiguring zone keys
-Nov  4 16:29:55 soa named[1186]: Fetching grp7.<lab_domain>.te-labs.training/RSASHA256/12969 (ZSK) from key repository.
-Nov  4 16:29:55 soa named[1186]: DNSKEY grp7.<lab_domain>.te-labs.training/RSASHA256/12969 (ZSK) is now published
-Nov  4 16:29:55 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): next key event: 04-Nov-2022 16:34:55.906
-Nov  4 16:29:55 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): sending notifies (serial 5)
-Nov  4 16:29:55 soa named[1186]: client @0x7fed1c04b930 100.100.1.130#54173 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': I7FR started (serial 4 -> 5)
-Nov  4 16:29:55 soa named[1186]: client @0x7fed1c04b930 100.100.1.130#54173 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': I7FR ended: 1 messages, 11 records, 2343 bytes, 0.001 secs (2343000 bytes/sec)
-Nov  4 16:29:56 soa named[1186]: client @0x7fed1c0af4c0 100.100.1.131#41174 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': A7FR started (serial 5)
-Nov  4 16:29:56 soa named[1186]: client @0x7fed1c0af4c0 100.100.1.131#41174 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': A7FR ended: 1 messages, 28 records, 5030 bytes, 0.001 secs (5030000 bytes/sec)
-Nov  4 16:34:55 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): reconfiguring zone keys
-Nov  4 16:34:55 soa named[1186]: DNSKEY grp7.<lab_domain>.te-labs.training/RSASHA256/12969 (ZSK) is now active
-Nov  4 16:34:55 soa named[1186]: DNSKEY grp7.<lab_domain>.te-labs.training/RSASHA256/26734 (ZSK) is now inactive
-Nov  4 16:34:55 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): next key event: 04-Nov-2022 16:54:55.907
-Nov  4 16:34:55 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): sending notifies (serial 6)
-Nov  4 16:34:55 soa named[1186]: client @0x7fed2c05dc00 100.100.1.130#44965 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': I7FR started (serial 5 -> 6)
-Nov  4 16:34:55 soa named[1186]: client @0x7fed2c05dc00 100.100.1.130#44965 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': I7FR ended: 1 messages, 10 records, 2067 bytes, 0.001 secs (2067000 bytes/sec)
-Nov  4 16:34:56 soa named[1186]: client @0x7fed1c049bc0 100.100.1.131#44942 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': A7FR started (serial 6)
-Nov  4 16:34:56 soa named[1186]: client @0x7fed1c049bc0 100.100.1.131#44942 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': A7FR ended: 1 messages, 28 records, 5030 bytes, 0.001 secs (5030000 bytes/sec)
-Nov  4 16:54:55 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): reconfiguring zone keys
+Nov  4 15:15:51 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): next key event: 04-Nov-2022 16:15:51.577
+Nov  4 16:15:51 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): reconfiguring zone keys
+Nov  4 16:15:51 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): next key event: 04-Nov-2022 17:15:51.580
+Nov  4 16:26:23 soa named[1186]: received control channel command 'loadkeys grp7.dnsme.te-labs.training'
+Nov  4 16:26:23 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): reconfiguring zone keys
+Nov  4 16:26:23 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): next key event: 04-Nov-2022 16:29:55.905
+Nov  4 16:29:55 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): reconfiguring zone keys
+Nov  4 16:29:55 soa named[1186]: Fetching grp7.dnsme.te-labs.training/RSASHA256/12969 (ZSK) from key repository.
+Nov  4 16:29:55 soa named[1186]: DNSKEY grp7.dnsme.te-labs.training/RSASHA256/12969 (ZSK) is now published
+Nov  4 16:29:55 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): next key event: 04-Nov-2022 16:34:55.906
+Nov  4 16:29:55 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): sending notifies (serial 5)
+Nov  4 16:29:55 soa named[1186]: client @0x7fed1c04b930 100.100.1.130#54173 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': I7FR started (serial 4 -> 5)
+Nov  4 16:29:55 soa named[1186]: client @0x7fed1c04b930 100.100.1.130#54173 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': I7FR ended: 1 messages, 11 records, 2343 bytes, 0.001 secs (2343000 bytes/sec)
+Nov  4 16:29:56 soa named[1186]: client @0x7fed1c0af4c0 100.100.1.131#41174 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': A7FR started (serial 5)
+Nov  4 16:29:56 soa named[1186]: client @0x7fed1c0af4c0 100.100.1.131#41174 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': A7FR ended: 1 messages, 28 records, 5030 bytes, 0.001 secs (5030000 bytes/sec)
+Nov  4 16:34:55 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): reconfiguring zone keys
+Nov  4 16:34:55 soa named[1186]: DNSKEY grp7.dnsme.te-labs.training/RSASHA256/12969 (ZSK) is now active
+Nov  4 16:34:55 soa named[1186]: DNSKEY grp7.dnsme.te-labs.training/RSASHA256/26734 (ZSK) is now inactive
+Nov  4 16:34:55 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): next key event: 04-Nov-2022 16:54:55.907
+Nov  4 16:34:55 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): sending notifies (serial 6)
+Nov  4 16:34:55 soa named[1186]: client @0x7fed2c05dc00 100.100.1.130#44965 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': I7FR started (serial 5 -> 6)
+Nov  4 16:34:55 soa named[1186]: client @0x7fed2c05dc00 100.100.1.130#44965 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': I7FR ended: 1 messages, 10 records, 2067 bytes, 0.001 secs (2067000 bytes/sec)
+Nov  4 16:34:56 soa named[1186]: client @0x7fed1c049bc0 100.100.1.131#44942 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': A7FR started (serial 6)
+Nov  4 16:34:56 soa named[1186]: client @0x7fed1c049bc0 100.100.1.131#44942 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': A7FR ended: 1 messages, 28 records, 5030 bytes, 0.001 secs (5030000 bytes/sec)
+Nov  4 16:54:55 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): reconfiguring zone keys
 Nov  4 16:54:55 soa named[1186]: Removing expired key 26734/RSASHA256 from DNSKEY RRset.
-Nov  4 16:54:55 soa named[1186]: DNSKEY grp7.<lab_domain>.te-labs.training/RSASHA256/26734 (ZSK) is now deleted
-Nov  4 16:54:55 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): next key event: 04-Nov-2022 17:54:55.908
-Nov  4 16:54:55 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): sending notifies (serial 7)
-Nov  4 16:54:55 soa named[1186]: client @0x7fed1c0a7660 100.100.1.130#42265 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': I7FR started (serial 6 -> 8)
-Nov  4 16:54:55 soa named[1186]: client @0x7fed1c0a7660 100.100.1.130#42265 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': I7FR ended: 1 messages, 38 records, 9338 bytes, 0.001 secs (9338000 bytes/sec)
-Nov  4 16:54:56 soa named[1186]: client @0x7fed2405ad30 100.100.1.131#60700 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': A7FR started (serial 8)
-Nov  4 16:54:56 soa named[1186]: client @0x7fed2405ad30 100.100.1.131#60700 (grp7.<lab_domain>.te-labs.training): transfer of 'grp7.<lab_domain>.te-labs.training/IN': A7FR ended: 1 messages, 26 records, 4737 bytes, 0.001 secs (4737000 bytes/sec)
-Nov  4 16:55:00 soa named[1186]: zone grp7.<lab_domain>.te-labs.training/IN (signed): sending notifies (serial 8)
+Nov  4 16:54:55 soa named[1186]: DNSKEY grp7.dnsme.te-labs.training/RSASHA256/26734 (ZSK) is now deleted
+Nov  4 16:54:55 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): next key event: 04-Nov-2022 17:54:55.908
+Nov  4 16:54:55 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): sending notifies (serial 7)
+Nov  4 16:54:55 soa named[1186]: client @0x7fed1c0a7660 100.100.1.130#42265 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': I7FR started (serial 6 -> 8)
+Nov  4 16:54:55 soa named[1186]: client @0x7fed1c0a7660 100.100.1.130#42265 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': I7FR ended: 1 messages, 38 records, 9338 bytes, 0.001 secs (9338000 bytes/sec)
+Nov  4 16:54:56 soa named[1186]: client @0x7fed2405ad30 100.100.1.131#60700 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': A7FR started (serial 8)
+Nov  4 16:54:56 soa named[1186]: client @0x7fed2405ad30 100.100.1.131#60700 (grp7.dnsme.te-labs.training): transfer of 'grp7.dnsme.te-labs.training/IN': A7FR ended: 1 messages, 26 records, 4737 bytes, 0.001 secs (4737000 bytes/sec)
+Nov  4 16:55:00 soa named[1186]: zone grp7.dnsme.te-labs.training/IN (signed): sending notifies (serial 8)
 ```
 
 

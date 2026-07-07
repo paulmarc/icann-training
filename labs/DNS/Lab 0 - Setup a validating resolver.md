@@ -100,16 +100,16 @@ You should get something similar to the below:
    CGroup: /system.slice/named.service
        └─849 /usr/sbin/named -f -u bind
 
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: **command channel listening on ::1#953**
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: managed-keys-zone: loaded serial 6
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: zone 0.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: zone 127.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: zone localhost/IN: loaded serial 2
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: zone 255.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: **all zones loaded**
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: **running**
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer>
-May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: resolver priming query complete
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: **command channel listening on ::1#953**
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: managed-keys-zone: loaded serial 6
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: zone 0.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: zone 127.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: zone localhost/IN: loaded serial 2
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: zone 255.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: **all zones loaded**
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: **running**
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer>
+May 13 01:38:27 resolv1.grp7.dnsme.te-labs.training named[849]: resolver priming query complete
 ```
 
 ### Test your new validating resolver
@@ -240,16 +240,16 @@ Drop-In: /etc/systemd/system/service.d
 	Process: 571 ExecStartPre=/usr/lib/unbound/package-helper chroot_setup (code=exited, status=0/SUCCESS)
 	Process: 574 ExecStartPre=/usr/lib/unbound/package-helper root_trust_anchor_update (code=exited, status=0/SUCCESS)   Main PID: 578 (unbound)      Tasks: 1 (limit: 152822)     Memory: 7.8M     
 	CGroup: /system.slice/unbound.service             		└─578 /usr/sbin/unbound -d
-May 13 03:49:10 resolv2.grp7.<lab_domain>.te-labs.training unbound[178]: [178:0] info: [25%]=0 median[50%]=0 [75%]=0
-May 13 03:49:10 resolv2.grp7.<lab_domain>.te-labs.training unbound[178]: [178:0] info: lower(secs) upper(secs) recursions
-May 13 03:49:10 resolv2.grp7.<lab_domain>.te-labs.training unbound[178]: [178:0] info:    0.000000    0.000001 1
-May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training package-helper[577]: /var/lib/unbound/root.key has content
-May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training package-helper[577]: success: the anchor is ok
-May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training unbound[578]: [578:0] notice: init module 0: subnet
-May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training unbound[578]: [578:0] notice: init module 1: validator
-May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training unbound[578]: [578:0] notice: init module 2: iterator
-May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training unbound[578]: [578:0] info: start of service (unbound 1.9.4).
-May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training systemd[1]: Started Unbound DNS server.
+May 13 03:49:10 resolv2.grp7.dnsme.te-labs.training unbound[178]: [178:0] info: [25%]=0 median[50%]=0 [75%]=0
+May 13 03:49:10 resolv2.grp7.dnsme.te-labs.training unbound[178]: [178:0] info: lower(secs) upper(secs) recursions
+May 13 03:49:10 resolv2.grp7.dnsme.te-labs.training unbound[178]: [178:0] info:    0.000000    0.000001 1
+May 13 03:49:11 resolv2.grp7.dnsme.te-labs.training package-helper[577]: /var/lib/unbound/root.key has content
+May 13 03:49:11 resolv2.grp7.dnsme.te-labs.training package-helper[577]: success: the anchor is ok
+May 13 03:49:11 resolv2.grp7.dnsme.te-labs.training unbound[578]: [578:0] notice: init module 0: subnet
+May 13 03:49:11 resolv2.grp7.dnsme.te-labs.training unbound[578]: [578:0] notice: init module 1: validator
+May 13 03:49:11 resolv2.grp7.dnsme.te-labs.training unbound[578]: [578:0] notice: init module 2: iterator
+May 13 03:49:11 resolv2.grp7.dnsme.te-labs.training unbound[578]: [578:0] info: start of service (unbound 1.9.4).
+May 13 03:49:11 resolv2.grp7.dnsme.te-labs.training systemd[1]: Started Unbound DNS server.
 ```
 
 ### Test your new validating resolver

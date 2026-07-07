@@ -68,7 +68,7 @@ Our "parent" (<*lab_domain*>.te-labs.training) has already created the following
 
 ```shell
 ; grp7
-grp7             NS          <lab_domain>.te-labs.training.
+grp7             NS          dnsme.te-labs.training.
 ; ---Placeholder for grp7 DS record (DO NOT MANUALLY EDIT THIS LINE)---
 
 ```
@@ -94,7 +94,7 @@ Then, update the db.grp7 zone to look like the below:
 ; grp7 
 
 $TTL    120
-@       IN      SOA     soa.grp7.<lab_domain>.te-labs.training. dnsadmin.grp7.<lab_domain>.te-labs.training. (                                            
+@       IN      SOA     soa.grp7.dnsme.te-labs.training. dnsadmin.grp7.dnsme.te-labs.training. (                                            
                               1         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
@@ -103,7 +103,7 @@ $TTL    120
 ;
 
 ; grp7 
-@             NS           <lab_domain>.te-labs.training.
+@             NS           dnsme.te-labs.training.
 @	     T7T	   "I AM LEARNING DNS AND IT IS FUN"
 
 ns1         A           100.100.7.130
@@ -131,7 +131,7 @@ You can add more records as you want.
 In the configuration file ***/etc/bind/named.conf.local*** , create a new "zone" statement as below:
 
 ```
-zone "grp7.<lab_domain>.te-labs.training" {
+zone "grp7.dnsme.te-labs.training" {
 		type primary;
 		file "/var/lib/bind/zones/db.grp7";
 		allow-transfer { any; };
@@ -168,16 +168,16 @@ root@soa:/var/lib$ sudo systemctl status bind9
      CGroup: /system.slice/named.service
              └─2944 /usr/sbin/named -f -u bind
 
-Oct 29 11:37:52 soa.grp7.<lab_domain>.te-labs.training named[2944]: zone grp7.<lab_domain>.te-labs.training/I>
-Oct 29 11:37:52 soa.grp7.<lab_domain>.te-labs.training named[2944]: all zones loaded
-Oct 29 11:37:52 soa.grp7.<lab_domain>.te-labs.training named[2944]: running
-Oct 29 11:37:52 soa.grp7.<lab_domain>.te-labs.training named[2944]: zone grp7.<lab_domain>.te-labs.training/I>
-Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: managed-keys-zone: Key 20326 fo>
-Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: resolver priming query complete
-Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: checkhints: b.root-servers.net/>
-Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: checkhints: b.root-servers.net/>
-Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: checkhints: b.root-servers.net/>
-Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[29
+Oct 29 11:37:52 soa.grp7.dnsme.te-labs.training named[2944]: zone grp7.dnsme.te-labs.training/I>
+Oct 29 11:37:52 soa.grp7.dnsme.te-labs.training named[2944]: all zones loaded
+Oct 29 11:37:52 soa.grp7.dnsme.te-labs.training named[2944]: running
+Oct 29 11:37:52 soa.grp7.dnsme.te-labs.training named[2944]: zone grp7.dnsme.te-labs.training/I>
+Oct 29 11:37:53 soa.grp7.dnsme.te-labs.training named[2944]: managed-keys-zone: Key 20326 fo>
+Oct 29 11:37:53 soa.grp7.dnsme.te-labs.training named[2944]: resolver priming query complete
+Oct 29 11:37:53 soa.grp7.dnsme.te-labs.training named[2944]: checkhints: b.root-servers.net/>
+Oct 29 11:37:53 soa.grp7.dnsme.te-labs.training named[2944]: checkhints: b.root-servers.net/>
+Oct 29 11:37:53 soa.grp7.dnsme.te-labs.training named[2944]: checkhints: b.root-servers.net/>
+Oct 29 11:37:53 soa.grp7.dnsme.te-labs.training named[29
 ...
 ```
 
@@ -186,8 +186,8 @@ Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[29
 Then, query your zone on the local server:
 
 ```
-root@soa:/var/lib$ dig @localhost soa grp7.<lab_domain>.te-labs.training.
-; <<>> DiG 9.16.1-Ubuntu <<>> @localhost soa grp7.<lab_domain>.te-labs.training.
+root@soa:/var/lib$ dig @localhost soa grp7.dnsme.te-labs.training.
+; <<>> DiG 9.16.1-Ubuntu <<>> @localhost soa grp7.dnsme.te-labs.training.
 ; (2 servers found)
 ;; global options: +cmd
 ;; Got answer:
@@ -198,10 +198,10 @@ root@soa:/var/lib$ dig @localhost soa grp7.<lab_domain>.te-labs.training.
 ; EDNS: version: 0, flags:; udp: 4096
 ; COOKIE: 270e2c46ed443c1c01000000609c59f04ba85015ff71998d (good)
 ;; QUESTION SECTION:
-;grp7.<lab_domain>.te-labs.training.        IN      SOA
+;grp7.dnsme.te-labs.training.        IN      SOA
 
 ;; ANSWER SECTION:
-grp7.<lab_domain>.te-labs.training. 30 IN   SOA     grp7.<lab_domain>.te-labs.training. dnsadmin.<lab_domain>.te-labs.training. 1 604800 86400 2419200 86400
+grp7.dnsme.te-labs.training. 30 IN   SOA     grp7.dnsme.te-labs.training. dnsadmin.dnsme.te-labs.training. 1 604800 86400 2419200 86400
 
 ;; Query time: 0 msec
 ;; SERVER: ::1#53(::1)
@@ -234,7 +234,7 @@ To do this, in the ***/etc/bind/named.conf.local*** file, configure the followin
 // Do any local configuration here
 //
 
-zone "grp7.<lab_domain>.te-labs.training" {
+zone "grp7.dnsme.te-labs.training" {
         type secondary;
         file "/var/lib/bind/zones/db.grp7.secondary";
         masters { 
@@ -272,16 +272,16 @@ $ sudo systemctl status bind9
      CGroup: /system.slice/named.service
              └─739 /usr/sbin/named -f -u bind
 
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: all zones loaded
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: running
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: zone grp7.<lab_domain>.te-labs.training/IN: Transfer started.
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: transfer of 'grp7.<lab_domain>.te-labs.training/IN' from 100.100.2.66#53: connec>
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: zone grp7.<lab_domain>.te-labs.training/IN: transferred serial 1
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: transfer of 'grp7.<lab_domain>.te-labs.training/IN' from 100.100.2.66#53: Transf>
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: transfer of 'grp7.<lab_domain>.te-labs.training/IN' from 100.100.2.66#53: Transf>
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: zone grp7.<lab_domain>.te-labs.training/IN: sending notifies (serial 1)
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer com>
-May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: resolver priming query complete
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: all zones loaded
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: running
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: zone grp7.dnsme.te-labs.training/IN: Transfer started.
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: transfer of 'grp7.dnsme.te-labs.training/IN' from 100.100.2.66#53: connec>
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: zone grp7.dnsme.te-labs.training/IN: transferred serial 1
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: transfer of 'grp7.dnsme.te-labs.training/IN' from 100.100.2.66#53: Transf>
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: transfer of 'grp7.dnsme.te-labs.training/IN' from 100.100.2.66#53: Transf>
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: zone grp7.dnsme.te-labs.training/IN: sending notifies (serial 1)
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer com>
+May 13 04:25:43 ns1.grp7.dnsme.te-labs.training named[739]: resolver priming query complete
 ```
 
 
@@ -364,12 +364,12 @@ $ sudo systemctl status nsd
              ├─639 /usr/sbin/nsd -d
              └─640 /usr/sbin/nsd -d
 
-May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training systemd[1]: Starting Name Server Daemon...
-May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training nsd[638]: nsd starting (NSD 4.1.26)
-May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training nsd[638]: [2024-05-13 05:02:35.865] nsd[638]: notice: nsd starting (NSD 4.1.26)
-May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training nsd[639]: nsd started (NSD 4.1.26), pid 638
-May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training nsd[639]: [2024-05-13 05:02:35.922] nsd[639]: notice: nsd started (NSD 4.1.26), pid 638
-May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training systemd[1]: Started Name Server Daemon.
+May 13 05:02:35 ns2.grp7.dnsme.te-labs.training systemd[1]: Starting Name Server Daemon...
+May 13 05:02:35 ns2.grp7.dnsme.te-labs.training nsd[638]: nsd starting (NSD 4.1.26)
+May 13 05:02:35 ns2.grp7.dnsme.te-labs.training nsd[638]: [2024-05-13 05:02:35.865] nsd[638]: notice: nsd starting (NSD 4.1.26)
+May 13 05:02:35 ns2.grp7.dnsme.te-labs.training nsd[639]: nsd started (NSD 4.1.26), pid 638
+May 13 05:02:35 ns2.grp7.dnsme.te-labs.training nsd[639]: [2024-05-13 05:02:35.922] nsd[639]: notice: nsd started (NSD 4.1.26), pid 638
+May 13 05:02:35 ns2.grp7.dnsme.te-labs.training systemd[1]: Started Name Server Daemon.
 ```
 
 

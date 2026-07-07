@@ -15,7 +15,7 @@ Version antérieure:-
 
 
 
-Pour rappel, votre nom de domaine est *grp7.<lab_domain>.te-labs.training* et celui de votre parent est  *<lab_domain>.te-labs.training*.
+Pour rappel, votre nom de domaine est *grp7.dnsme.te-labs.training* et celui de votre parent est  *dnsme.te-labs.training*.
 
 La première tâche de ce lab consistera à créer l'enregistrement DS de votre zone et l'enregistrer dans un fichier. Pour cela, créez un répertoire dédié pour vos DS
 
@@ -31,12 +31,12 @@ $ sudo chown -R bind:bind /var/lib/bind/ds
 > [!IMPORTANT]
 > Pour générer l'enregistrement DS, vous devrez remplacer les lettres "7YZ" et "YOUR-KSK-key_ID" dans la commande ci-dessous par leurs valeurs correctes en fonction de votre algorithme de signature et l'ID de votre KSK.
 >
-> Par exemple, vous obtiendrez `/var/lib/bind/keys/Kgrp7.<lab_domain>.te-labs.training.+013+21554.key |sudo tee /var/lib/bind/ds/DS_21554.grp7` si vous avez utilisé l'algorithme de signature DNSSEC 13 et si la KSK générée par votre signer est 21554.
+> Par exemple, vous obtiendrez `/var/lib/bind/keys/Kgrp7.dnsme.te-labs.training.+013+21554.key |sudo tee /var/lib/bind/ds/DS_21554.grp7` si vous avez utilisé l'algorithme de signature DNSSEC 13 et si la KSK générée par votre signer est 21554.
 
 Exécutez donc la commande suivante pour obtenir l'enregistrement DS et le sauvegarder dans un fichier dans votre nouveau répertoire des DS:
 
 ```
-$ dnssec-dsfromkey /var/lib/bind/keys/Kgrp7.<lab_domain>.te-labs.training.+7YZ+YOUR-KSK-key-tag.key |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
+$ dnssec-dsfromkey /var/lib/bind/keys/Kgrp7.dnsme.te-labs.training.+7YZ+YOUR-KSK-key-tag.key |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
 ```
 
 
@@ -44,7 +44,7 @@ $ dnssec-dsfromkey /var/lib/bind/keys/Kgrp7.<lab_domain>.te-labs.training.+7YZ+Y
 Une autre option serait de générer l'enregistrement directement depuis l'enregistrement DNSKEY en interrogeant votre domaine avec l'option ""-f". 
 
 ```
-$ dig @localhost dnskey grp7.<lab_domain>.te-labs.training | dnssec-dsfromkey -f - grp7.<lab_domain>.te-labs.training |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
+$ dig @localhost dnskey grp7.dnsme.te-labs.training | dnssec-dsfromkey -f - grp7.dnsme.te-labs.training |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
 ```
 
 
@@ -58,7 +58,7 @@ $ cat /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
 Cette commande devrait retourner un résultat similaire à la ligne ci-dessous:
 
 ```
-grp7.<lab_domain>.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
+grp7.dnsme.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
 ```
 
 
@@ -111,7 +111,7 @@ Vous pouvez donc à nouveau interroger votre zone en utilisant les mêmes requê
 Pour clore le processus de signature de votre zone une fois la confirmation de la publication de votre DS par votre parent obtenue, vous pouvez notifier à votre système de signature que cette action est effectivement effectuée chez le parent. 
 
 ```
-$ sudo rndc dnssec -checkds -key YOUR-KSK-key_ID published grp7.<lab_domain>.te-labs.training
+$ sudo rndc dnssec -checkds -key YOUR-KSK-key_ID published grp7.dnsme.te-labs.training
 KSK 42330: Marked DS as published since 17-May-2026 19:14:49.000
 ```
 
@@ -126,7 +126,7 @@ Vous obtiendrez alors un message comme celui affiché ci-dessus.
 Patientez, puis vérifiez à nouveau le statut de votre ds dans votre signer pour votre zone:
 
 ```
-$ sudo rndc dnssec -status grp7.<lab_domain>.te-labs.training
+$ sudo rndc dnssec -status grp7.dnsme.te-labs.training
 dnssec-policy: NotForProduction
 current time:  Sun May 17 19:16:21 2026
 

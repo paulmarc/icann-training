@@ -28,7 +28,7 @@ $ sudo chown -R bind:bind /var/lib/bind/keys
 Update your zone configuration statement in `/etc/bind/named.conf.local`, to look like the below : 
 
 ```
-zone "grp7.<lab_domain>.te-labs.training" {
+zone "grp7.dnsme.te-labs.training" {
 	type primary;
 	file "/var/lib/bind/zones/db.grp7";
 	allow-transfer { any; };
@@ -73,7 +73,7 @@ We use the command `rndc dnssec -status ZONE ` to confirm that the zone is signe
 In the past, we used to use the command `rndc signing -list ZONE ` to confirm that the zone is signed.
 
 ```
-$ sudo rndc signing -list grp7.<lab_domain>.te-labs.training
+$ sudo rndc signing -list grp7.dnsme.te-labs.training
 Done signing with key 5341/ECDSAP256SHA256
 Done signing with key 64259/ECDSAP256SHA256
 ```

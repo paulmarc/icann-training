@@ -29,7 +29,7 @@ $ sudo chown -R bind:bind /var/lib/bind/keys
 Le fichier de configuration  `/etc/bind/named.conf.local` comporte déjà des instructions ayant permis de charger votre zone. A présent, vous devez mettre à jour cette configuration en ajoutant les instructions de signature automatique de zone par BIND. La nouvelle configuration pour votre zone devrait ressembler à celle-ci : 
 
 ```
-zone "grp7.<lab_domain>.te-labs.training" {
+zone "grp7.dnsme.te-labs.training" {
 	type primary;
 	file "/var/lib/bind/zones/db.grp7";
 	allow-transfer { any; };
@@ -93,7 +93,7 @@ Utilisez la commande  `rndc dnssec -status ZONE ` pour confirmer si BIND a effec
 
 
 ```
-$ sudo rndc dnssec -status grp7.<lab_domain>.te-labs.training
+$ sudo rndc dnssec -status grp7.dnsme.te-labs.training
 dnssec-policy: NotForProduction
 current time:  Sun May 17 17:52:38 2026
 
@@ -123,7 +123,7 @@ key: 42330 (ECDSAP256SHA256), KSK
 Auparavant, nous utilisions la commande  `rndc signing -list ZONE ` pour confirmer la signature de zone par BIND.
 
 ```
-$ sudo rndc signing -list grp7.<lab_domain>.te-labs.training
+$ sudo rndc signing -list grp7.dnsme.te-labs.training
 Done signing with key 8731/ECDSAP256SHA256
 Done signing with key 42330/ECDSAP256SHA256
 ```

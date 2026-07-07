@@ -37,13 +37,13 @@ During this practice we are only going to access the following equipment:
 To map your IP address to your domain name, we’ll need to setup a reverse zone. We are going to configure a hidden authoritative server for your reverse zone and create the authoritative zone reverse\_*grp7*.<*lab_domain*>.te-labs.training.
 
 ```
-$ sudo nano /var/lib/bind/zones/reverse_grp7.<lab_domain>.te-labs.training
+$ sudo nano /var/lib/bind/zones/reverse_grp7.dnsme.te-labs.training
 ```
 
 
 ```
 $TTL    300
-@		IN		SOA		soa.grp7.<lab_domain>.te-labs.training. dnsadmin.<lab_domain>.te-labs.training. (                                            
+@		IN		SOA		soa.grp7.dnsme.te-labs.training. dnsadmin.dnsme.te-labs.training. (                                            
                               1         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
@@ -51,13 +51,13 @@ $TTL    300
                           86400 )       ; Negative Cache TTL
 ;
 
-                IN              NS              ns1.grp7.<lab_domain>.te-labs.training. ; your name server
-                IN              NS              ns2.grp7.<lab_domain>.te-labs.training. ; your name server
-66		IN		PTR		soa.grp7.<lab_domain>.te-labs.training.
-67		IN		PTR		resolv1.grp7.<lab_domain>.te-labs.training.
-68		IN		PTR		resolv2.grp7.<lab_domain>.te-labs.training.
-130		IN		PTR		ns1.grp7.<lab_domain>.te-labs.training.
-131		IN		PTR		ns2.grp7.<lab_domain>.te-labs.training.
+                IN              NS              ns1.grp7.dnsme.te-labs.training. ; your name server
+                IN              NS              ns2.grp7.dnsme.te-labs.training. ; your name server
+66		IN		PTR		soa.grp7.dnsme.te-labs.training.
+67		IN		PTR		resolv1.grp7.dnsme.te-labs.training.
+68		IN		PTR		resolv2.grp7.dnsme.te-labs.training.
+130		IN		PTR		ns1.grp7.dnsme.te-labs.training.
+131		IN		PTR		ns2.grp7.dnsme.te-labs.training.
 ```
 
 Save and exit.
@@ -65,7 +65,7 @@ Save and exit.
 Run the following command to check for any errors in your setup:
 
 ```
-$ named-checkzone 7.100.100.in-addr.arpa /var/lib/bind/zones/reverse_grp7.<lab_domain>.te-labs.training
+$ named-checkzone 7.100.100.in-addr.arpa /var/lib/bind/zones/reverse_grp7.dnsme.te-labs.training
 ```
 
 Next, edit the /etc/bind/named.conf.local file and add the following lines:
@@ -73,7 +73,7 @@ Next, edit the /etc/bind/named.conf.local file and add the following lines:
 ```
 zone "7.100.100.in-addr.arpa" {
   type primary;
-  file "/var/lib/bind/zones/reverse_grp7.<lab_domain>.te-labs.training";
+  file "/var/lib/bind/zones/reverse_grp7.dnsme.te-labs.training";
   allow-transfer { any; };
   also-notify {100.100.7.130; 100.100.7.131; };
 };

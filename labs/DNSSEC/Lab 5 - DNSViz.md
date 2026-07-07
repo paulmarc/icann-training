@@ -60,7 +60,7 @@ root@resolv1:~# apt-get install dnsviz
 Run dnsviz against your domain
 
 ```
-root@resolv1:~# dnsviz probe grp7.<lab-domain>.te-labs.training | dnsviz graph -Tpng -O
+root@resolv1:~# dnsviz probe grp7.dnsme.te-labs.training | dnsviz graph -Tpng -O
 ```
 
 Inform your trainer who will download the file and open it in a graphical environment.
@@ -70,18 +70,18 @@ Alternatively, you may want to download and open this file on your own personal 
 Upload the file to the cloud 
 
 ```
-root@resolv1:~# curl -F "file=@grp7.<lab-domain>.te-labs.training.png" https://file.io
+root@resolv1:~# curl -F "file=@grp7.dnsme.te-labs.training.png" https://file.io
 ```
 
 The expected output is 
 
 ```
-root@resolv1:~# curl -F "file=@grp7.<lab-domain>.te-labs.training.png" https://file.io
+root@resolv1:~# curl -F "file=@grp7.dnsme.te-labs.training.png" https://file.io
 {"success":true,"status":200,"id":"--------------------------------",
 "key":"7777777777777777777",
 "path":"/",
 "nodeType":"file",
-"name":"grp7.<lab-domain>.te-labs.training.png",
+"name":"grp7.dnsme.te-labs.training.png",
 "title":null,"description":null,"size":144179,"link":"https://file.io/7777777777777777777",
 "private":false,"expires":"2024-09-18T09:05:27.433Z",
 "downloads":0,"maxDownloads":1,"autoDelete":true,"planId":0,"screeningStatus":"pending",

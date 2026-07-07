@@ -14,7 +14,7 @@ Previous version:-
 
 ------
 
-As a reminder, your domain is grp7.<lab_domain>.te-labs.training, and your parent is <lab_domain>.te-labs.training.
+As a reminder, your domain is grp7.dnsme.te-labs.training, and your parent is dnsme.te-labs.training.
 First, create a folder to store your DS key files.
 
 ```
@@ -32,13 +32,13 @@ $ sudo chown -R bind:bind /var/lib/bind/ds
 Execute the following command to get the DS record and save it in the required file:
 
 ```
-$ dnssec-dsfromkey /var/lib/bind/keys/Kgrp7.<lab_domain>.te-labs.training.+7YZ+YOUR-KSK-key-tag.key |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
+$ dnssec-dsfromkey /var/lib/bind/keys/Kgrp7.dnsme.te-labs.training.+7YZ+YOUR-KSK-key-tag.key |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
 ```
 
 or you could extract the DS directly from the DNSKEY by querying your domain.
 
 ```
-# dig @localhost dnskey grp7.<lab_domain>.te-labs.training | dnssec-dsfromkey -f - grp7.<lab_domain>.te-labs.training |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
+# dig @localhost dnskey grp7.dnsme.te-labs.training | dnssec-dsfromkey -f - grp7.dnsme.te-labs.training |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
 ```
 
 
@@ -52,7 +52,7 @@ Verify the content of the generated file:
 Which should contain something similar to the following line:
 
 ```
-grp7.<lab_domain>.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
+grp7.dnsme.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
 ```
 
 
