@@ -67,7 +67,7 @@ grp7.dnsme.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5B
 
 Afin d'établir la chaine de confiance DNSSEC et rendre opérationelle la signature de votre zone, il est nécessaire de partager votre enregistrement DS à votre registre (parent) afin qu'il le publie dans sa zone (comme vos NS et glue records par exemple). 
 
-Pour cela, copiez la ligne de votre enregistrement DS et collez la dans le champ dédié dans la page d'accueil de votre lab `https://<*lab_domain*>.te-labs.training/grp7` et patientez 5 minutes avant de continuer les prochaines étapes.
+Pour cela, copiez la ligne de votre enregistrement DS et collez la dans le champ dédié dans la page d'accueil de votre lab `https://<*dnsme*>.te-labs.training/grp7` et patientez 5 minutes avant de continuer les prochaines étapes.
 
 
 
@@ -76,9 +76,9 @@ Pour cela, copiez la ligne de votre enregistrement DS et collez la dans le champ
 Utilisez la commande "dig" pour vérifier si votre enregistrement DS est publié par votre parent.
 
 ```
-$ dig DS grp7.<*lab_domain*>.te-labs.training 
+$ dig DS grp7.<*dnsme*>.te-labs.training 
 
-; <<>> DiG 9.16.1-Ubuntu <<>> DS grp7.<*lab_domain*>.te-labs.training
+; <<>> DiG 9.16.1-Ubuntu <<>> DS grp7.<*dnsme*>.te-labs.training
 ;; global options: +cmd
 ;; Got answer:
 ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 57805
@@ -87,10 +87,10 @@ $ dig DS grp7.<*lab_domain*>.te-labs.training
 ;; OPT PSEUDOSECTION:
 ; EDNS: version: 0, flags:; udp: 1232
 ;; QUESTION SECTION:
-;grp7.<*lab_domain*>.te-labs.training.      IN      DS
+;grp7.<*dnsme*>.te-labs.training.      IN      DS
 
 ;; ANSWER SECTION:
-grp7.<*lab_domain*>.te-labs.training. 60    IN    DS      42330 13 2 6376D6757675DC67535CD3546D9CE6B531E542417BA8B80DC550F793 C2DC61AB
+grp7.<*dnsme*>.te-labs.training. 60    IN    DS      42330 13 2 6376D6757675DC67535CD3546D9CE6B531E542417BA8B80DC550F793 C2DC61AB
 
 ;; Query time: 12 msec
 ;; SERVER: 100.100.35.67#53(100.100.35.67) (UDP)

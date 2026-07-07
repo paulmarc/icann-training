@@ -28,13 +28,13 @@ During this practice we are only going to access the following equipment:
 
 > [!WARNING]
 >
-> In all this lab, be carefull to always replace ***7*** by your Group number in IP addresses, server name and any other place where required. Same for <*lab_domain*> to be replace by the domain name registered for the class.
+> In all this lab, be carefull to always replace ***7*** by your Group number in IP addresses, server name and any other place where required. Same for <*dnsme*> to be replace by the domain name registered for the class.
 
 
 
 ## Configure the primary authoritative server (SOA)
 
-To map your IP address to your domain name, we’ll need to setup a reverse zone. We are going to configure a hidden authoritative server for your reverse zone and create the authoritative zone reverse\_*grp7*.<*lab_domain*>.te-labs.training.
+To map your IP address to your domain name, we’ll need to setup a reverse zone. We are going to configure a hidden authoritative server for your reverse zone and create the authoritative zone reverse\_*grp7*.<*dnsme*>.te-labs.training.
 
 ```
 $ sudo nano /var/lib/bind/zones/reverse_grp7.dnsme.te-labs.training
