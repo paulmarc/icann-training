@@ -16,7 +16,7 @@ Previous version:-
 
 We assume that:
 
-1. your authoritative servers ns1.grp7.<*dnsme*>.te-labs.training. and ns2.grp7.<*dnsme*>.te-labs.training. are serving your domain.
+1. your authoritative servers ns1.grp7*dnsme*.te-labs.training. and ns2.grp7*dnsme*.te-labs.training. are serving your domain.
 2. Your zone is signed using BIND9, from an earlier lab.
 3. You are using two key pairs, a KSK and a ZSK.
 4. A DS RRSet has been uploaded to the class domain authoritative nameserver, and is published in the workshop <**dnsme**> zone.
@@ -30,12 +30,12 @@ We assume that:
 Before you continue, check that:
 
 ```
-$ dig grp7.<*dnsme*>.te-labs.training dnskey +dnssec +multiline
+$ dig grp7*dnsme*.te-labs.training dnskey +dnssec +multiline
 ```
 shows you one ZSK and one KSK. Remember that the KSK has flags 257.
 
 ```
-$ dig grp7.<*dnsme*>.te-labs.training SOA +dnssec +multiline
+$ dig grp7*dnsme*.te-labs.training SOA +dnssec +multiline
 ```
 gives you the SOA record for your domain, and that it is signed.
 

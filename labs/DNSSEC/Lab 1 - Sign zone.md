@@ -96,12 +96,12 @@ We can now use *dig* utility to confirm that the zone is signed and play with th
 
 **QUESTION**: Will you get the "ad" flag ? Why ?
 
-1. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.66
-2. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.66 +dnssec
-3. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.66
-4. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.66 +dnssec +multi
-5. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.130
-6. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.130 +dnssec +multi
-7. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.130 +dnssec +multi
+1. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.66
+2. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.66 +dnssec
+3. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.66
+4. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.66 +dnssec +multi
+5. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.130
+6. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.130 +dnssec +multi
+7. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.130 +dnssec +multi
 
 **QUESTIONS**: did you get the answers ? Did you receive the  signatures ? Did you get the "ad" flag ? Why ?

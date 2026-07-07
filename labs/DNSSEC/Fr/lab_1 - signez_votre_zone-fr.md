@@ -152,13 +152,13 @@ Utilisez votre compagnon  ***dig***  pour interroger la zone et obtenir les enre
 
 **QUESTION**: examinez les commandes ci-dessous et dites si vous pensez obtenir le drapeau (flag) "**ad**" dans les réponses qu'elles devraient engendrer? Pourquoi ?
 
-1. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.66
-2. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.66 +dnssec
-3. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.66
-4. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.66 +dnssec +multi
-5. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.130
-6. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.130 +dnssec +multi
-7. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.130 +dnssec +multi
+1. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.66
+2. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.66 +dnssec
+3. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.66
+4. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.66 +dnssec +multi
+5. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.130
+6. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.130 +dnssec +multi
+7. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.130 +dnssec +multi
 
 
 

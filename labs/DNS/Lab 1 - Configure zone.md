@@ -60,11 +60,11 @@ During this practice we are only going to access the following equipment:
 
 ### Intro
 
-We are going to configure a hidden authoritative server and create the authoritative zone for your domain name *grp7*.<*dnsme*>.te-labs.training.
+We are going to configure a hidden authoritative server and create the authoritative zone for your domain name *grp7**dnsme*.te-labs.training.
 
 ### What we already know
 
-Our "parent" (<*dnsme*>.te-labs.training) has already created the following in its own zone:
+Our "parent" (<*dnsme*.te-labs.training) has already created the following in its own zone:
 
 ```shell
 ; grp7
@@ -378,10 +378,10 @@ May 13 05:02:35 ns2.grp7.dnsme.te-labs.training systemd[1]: Started Name Server 
 
 We will now use *dig* tool to verify the zone configuration and propagation, then do the same for one or two other groups in the class and share comments. From your client, run the following dig queries. All should return **answer section** otherwise you must review your configurations before continiuing:
 
-1. dig soa *grp7*.<*dnsme*>.te-labs.training. @100.100.7.66
-2. dig soa *grp7*.<*dnsme*>.te-labs.training. @100.100.7.130
-3. dig soa *grp7*.<*dnsme*>.te-labs.training. @100.100.7.131
-4. dig soa *grp7*.<*dnsme*>.te-labs.training. @100.100.7.131 +short
-5. dig soa *grp7*.<*dnsme*>.te-labs.training. @100.100.7.131 +multi
-6. dig NS *grp7*.<*dnsme*>.te-labs.training. @100.100.7.130
-7. dig NS *grp7*.<*dnsme*>.te-labs.training. @100.100.7.130 +multi
+1. dig soa *grp7**dnsme*.te-labs.training. @100.100.7.66
+2. dig soa *grp7**dnsme*.te-labs.training. @100.100.7.130
+3. dig soa *grp7**dnsme*.te-labs.training. @100.100.7.131
+4. dig soa *grp7**dnsme*.te-labs.training. @100.100.7.131 +short
+5. dig soa *grp7**dnsme*.te-labs.training. @100.100.7.131 +multi
+6. dig NS *grp7**dnsme*.te-labs.training. @100.100.7.130
+7. dig NS *grp7**dnsme*.te-labs.training. @100.100.7.130 +multi

@@ -59,7 +59,7 @@ grp7.dnsme.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5B
 
 ### Push the DS to your parent
 
-You can now send the DS file to the parent. To do so, copy the content of the ds file you generated above and paste it in the text field below the network diagram of your lab in https://<*dnsme*>.te-labs.training/grp7 and wait 5 minutes to continue this lab.
+You can now send the DS file to the parent. To do so, copy the content of the ds file you generated above and paste it in the text field below the network diagram of your lab in https://<*dnsme*.te-labs.training/grp7 and wait 5 minutes to continue this lab.
 
 
 ### Verify that your DS is published into your parent's zone
@@ -67,9 +67,9 @@ You can now send the DS file to the parent. To do so, copy the content of the ds
 Query your parent zone and confirm that they have published your DS.
 
 ```
-sysadm@cli:~$ dig DS grp7.<*dnsme*>.te-labs.training 
+sysadm@cli:~$ dig DS grp7*dnsme*.te-labs.training 
 
-; <<>> DiG 9.16.1-Ubuntu <<>> DS grp7.<*dnsme*>.te-labs.training
+; <<>> DiG 9.16.1-Ubuntu <<>> DS grp7*dnsme*.te-labs.training
 ;; global options: +cmd
 ;; Got answer:
 ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 57805
@@ -78,10 +78,10 @@ sysadm@cli:~$ dig DS grp7.<*dnsme*>.te-labs.training
 ;; OPT PSEUDOSECTION:
 ; EDNS: version: 0, flags:; udp: 1232
 ;; QUESTION SECTION:
-;grp7.<*dnsme*>.te-labs.training.      IN      DS
+;grp7*dnsme*.te-labs.training.      IN      DS
 
 ;; ANSWER SECTION:
-grp7.<*dnsme*>.te-labs.training. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
+grp7*dnsme*.te-labs.training. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
 
 ;; Query time: 320 msec
 ;; SERVER: 9.9.9.9#53(9.9.9.9)
