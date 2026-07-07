@@ -120,12 +120,12 @@ Run the following commands and confirm if you receive the "ad" flag:
 2. dig SOA com. @100.100.7.67 +dnssec
 3. dig A www.icann.org @100.100.7.67
 4. dig NS icann.org @100.100.7.67
-5. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.67
-6. dig NS *grp7**dnsme*.te-labs.training @100.100.7.67 +dnssec
-7. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.67
-8. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.130
-9. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.130 +multi
-10. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.131 +dnssec +multi
+5. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.67
+6. dig NS *grp7*.<*dnsme*>.te-labs.training @100.100.7.67 +dnssec
+7. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.67
+8. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.130
+9. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.130 +multi
+10. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.131 +dnssec +multi
 
 Did you receive the "ad" flag for the last three dig queries ? Why ?
 
@@ -154,12 +154,12 @@ Save and exit. Then try the following queries:
 2. dig SOA com. +dnssec
 3. dig A www.icann.org
 4. dig NS icann.org
-5. dig NS *grp7**dnsme*.te-labs.training
-6. dig NS *grp7**dnsme*.te-labs.training +dnssec
-7. dig SOA *grp7**dnsme*.te-labs.training
-8. dig SOA *grp7**dnsme*.te-labs.training +dnssec +multi
-9. dig DNSKEY *grp7**dnsme*.te-labs.training
-10. dig DNSKEY *grp7**dnsme*.te-labs.training +multi
+5. dig NS *grp7*.<*dnsme*>.te-labs.training
+6. dig NS *grp7*.<*dnsme*>.te-labs.training +dnssec
+7. dig SOA *grp7*.<*dnsme*>.te-labs.training
+8. dig SOA *grp7*.<*dnsme*>.te-labs.training +dnssec +multi
+9. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training
+10. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training +multi
 
 Did you get the "ad" flag in all the cases ?
 
@@ -260,12 +260,12 @@ Run the following commands and confirm if you receive the "ad" flag:
 2. dig SOA com. @100.100.7.68 +dnssec
 3. dig A www.icann.org @100.100.7.68
 4. dig NS icann.org @100.100.7.68
-5. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.68
-6. dig NS *grp7**dnsme*.te-labs.training @100.100.7.68 +dnssec
-7. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.68
-8. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.130
-9. dig DNSKEY *grp7**dnsme*.te-labs.training @100.100.7.130 +multi
-10. dig SOA *grp7**dnsme*.te-labs.training @100.100.7.131 +dnssec +multi
+5. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.68
+6. dig NS *grp7*.<*dnsme*>.te-labs.training @100.100.7.68 +dnssec
+7. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.68
+8. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.130
+9. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training @100.100.7.130 +multi
+10. dig SOA *grp7*.<*dnsme*>.te-labs.training @100.100.7.131 +dnssec +multi
 
 Did you receive the "ad" flag for the last three dig queries ? Why ?
 
@@ -291,11 +291,11 @@ Save and exit. Then try the following queries:
 2. dig SOA com. +dnssec
 3. dig A www.icann.org
 4. dig NS icann.org
-5. dig NS *grp7**dnsme*.te-labs.training
-6. dig NS *grp7**dnsme*.te-labs.training +dnssec
-7. dig SOA *grp7**dnsme*.te-labs.training
-8. dig SOA *grp7**dnsme*.te-labs.training +dnssec +multi
-9. dig DNSKEY *grp7**dnsme*.te-labs.training
-10. dig DNSKEY *grp7**dnsme*.te-labs.training +multi
+5. dig NS *grp7*.<*dnsme*>.te-labs.training
+6. dig NS *grp7*.<*dnsme*>.te-labs.training +dnssec
+7. dig SOA *grp7*.<*dnsme*>.te-labs.training
+8. dig SOA *grp7*.<*dnsme*>.te-labs.training +dnssec +multi
+9. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training
+10. dig DNSKEY *grp7*.<*dnsme*>.te-labs.training +multi
 
 Did you get the "ad" flag in all the cases ?

@@ -16,7 +16,7 @@ Previous version:-
 
 We assume that:
 
-1. your zone grp7*dnsme*.te-labs.training. is DNSSEC signed 
+1. your zone grp7.<*dnsme*>.te-labs.training. is DNSSEC signed 
 2. A DS RRSet has been uploaded to the class domain authoritative nameserver, and is published in the workshop <**dnsme**> zone.
 3. Your recursive resolvers resolv1 and resolv2 are configured and DNSSEC validating (lab DNSSEC validation).
 4. Your recursive resolvers (resolv1 and resolv2) software are configured to use themselves as resolvers (in /etc/resolv.conf)
@@ -30,7 +30,7 @@ We assume that:
 Before you continue, check the following in any of your two recursive resolvers:
 
 ```
-$ dig grp7*dnsme*.te-labs.training SOA
+$ dig grp7.<*dnsme*>.te-labs.training SOA
 ```
 returns:
 

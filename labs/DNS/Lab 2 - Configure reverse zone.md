@@ -34,7 +34,7 @@ During this practice we are only going to access the following equipment:
 
 ## Configure the primary authoritative server (SOA)
 
-To map your IP address to your domain name, we’ll need to setup a reverse zone. We are going to configure a hidden authoritative server for your reverse zone and create the authoritative zone reverse\_*grp7**dnsme*.te-labs.training.
+To map your IP address to your domain name, we’ll need to setup a reverse zone. We are going to configure a hidden authoritative server for your reverse zone and create the authoritative zone reverse\_*grp7*.<*dnsme*>.te-labs.training.
 
 ```
 $ sudo nano /var/lib/bind/zones/reverse_grp7.dnsme.te-labs.training
