@@ -131,14 +131,14 @@ If it doesn’t work, check permissions for `/var/log/bind` and restart `named`.
 Try a manual zone transfer of your own domain:
 
 ```
-$ dig @100.100.X.66 AXFR MY_DOMAIN
+$ dig @100.100.7.66 A7FR MY_DOMAIN
 ```
 
 Check the appropriate log file `/var/log/bind/transfers`:
 
 ```
-17-Feb-2023 11:18:15.331 client 100.100.X.66#61235: transfer of 'MY_DOMAIN/IN': AXFR started
-17-Feb-2023 11:18:15.331 client 100.100.X.66#61235: transfer of 'MY_DOMAIN/IN': AXFR ended
+17-Feb-2023 11:18:15.331 client 100.100.7.66#61235: transfer of 'MY_DOMAIN/IN': A7FR started
+17-Feb-2023 11:18:15.331 client 100.100.7.66#61235: transfer of 'MY_DOMAIN/IN': A7FR ended
 ```
 
 Try a zone transfer for a non-existent domain and check the same log file again.  What do you notice ?

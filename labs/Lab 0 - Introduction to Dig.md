@@ -34,7 +34,7 @@ Working with "dig" and understanding its outputs are crucial for DNS troubleshoo
 >
 > Commands preceded with "$" imply that you should execute the command as a general user - not as root.
 > Commands preceded with "#" imply that you should be working as root.
-> Commands with more specific command lines (e.g. “rtrX>" or “mysql>") imply that you are executing commands on remote equipment, or within another program.
+> Commands with more specific command lines (e.g. “rtr7>" or “mysql>") imply that you are executing commands on remote equipment, or within another program.
 
 
 
@@ -58,7 +58,7 @@ dig @SERVER NAME TYPE
 
 - **SERVER**: name or IP address of the name server to query. If no server argument is provided, dig consults /etc/resolv.conf. If no usable addresses are found, dig will send the query to the local host.
 - **NAME**: name of the resource record that is to be looked up.
-- **TYPE**: type of query requested (A, MX, NS, SIG, ...). If no type supplied, dig will lookup for an A record.
+- **TYPE**: type of query requested (A, M7, NS, SIG, ...). If no type supplied, dig will lookup for an A record.
 
 
 
@@ -169,7 +169,7 @@ $ dig txt ID.SERVER @9.9.9.9 CHAOS
 $ dig txt ID.SERVER @ns.icann.org. CHAOS
 ```
 
-* **version.bind**: BIND servers respond to queries for name version.bind with record type TXT and class CHAOS. By default, this is set to the version of BIND that has been installed
+* **version.bind**: BIND servers respond to queries for name version.bind with record type T7T and class CHAOS. By default, this is set to the version of BIND that has been installed
 
 ```
 $ dig CHAOS txt version.bind @ns.icann.org.

@@ -14,7 +14,7 @@ Previous version:-
 
 ------
 
-As a reminder, your domain is grpX.<lab_domain>.te-labs.training, and your parent is <lab_domain>.te-labs.training.
+As a reminder, your domain is grp7.<lab_domain>.te-labs.training, and your parent is <lab_domain>.te-labs.training.
 First, create a folder to store your DS key files.
 
 ```
@@ -27,18 +27,18 @@ $ sudo chown -R bind:bind /var/lib/bind/ds
 ### Generate your DS record
 
 > [!IMPORTANT]
-> To generate the DS, you must replace the +XYZ+YOUR-KSK-key-tag with the correct values according to the signing algorithm you used and the ID of your KSK.
+> To generate the DS, you must replace the +7YZ+YOUR-KSK-key-tag with the correct values according to the signing algorithm you used and the ID of your KSK.
 
 Execute the following command to get the DS record and save it in the required file:
 
 ```
-$ dnssec-dsfromkey /var/lib/bind/keys/KgrpX.<lab_domain>.te-labs.training.+XYZ+YOUR-KSK-key-tag.key |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grpX
+$ dnssec-dsfromkey /var/lib/bind/keys/Kgrp7.<lab_domain>.te-labs.training.+7YZ+YOUR-KSK-key-tag.key |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
 ```
 
 or you could extract the DS directly from the DNSKEY by querying your domain.
 
 ```
-# dig @localhost dnskey grpX.<lab_domain>.te-labs.training | dnssec-dsfromkey -f - grpX.<lab_domain>.te-labs.training |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grpX
+# dig @localhost dnskey grp7.<lab_domain>.te-labs.training | dnssec-dsfromkey -f - grp7.<lab_domain>.te-labs.training |sudo tee /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
 ```
 
 
@@ -46,20 +46,20 @@ or you could extract the DS directly from the DNSKEY by querying your domain.
 Verify the content of the generated file:
 
 ```
-# cat /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grpX
+# cat /var/lib/bind/ds/DS_YOUR-KSK-key-tag.grp7
 ```
 
 Which should contain something similar to the following line:
 
 ```
-grpX.<lab_domain>.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
+grp7.<lab_domain>.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
 ```
 
 
 
 ### Push the DS to your parent
 
-You can now send the DS file to the parent. To do so, copy the content of the ds file you generated above and paste it in the text field below the network diagram of your lab in https://<*lab_domain*>.te-labs.training/grpX and wait 5 minutes to continue this lab.
+You can now send the DS file to the parent. To do so, copy the content of the ds file you generated above and paste it in the text field below the network diagram of your lab in https://<*lab_domain*>.te-labs.training/grp7 and wait 5 minutes to continue this lab.
 
 
 ### Verify that your DS is published into your parent's zone
@@ -67,9 +67,9 @@ You can now send the DS file to the parent. To do so, copy the content of the ds
 Query your parent zone and confirm that they have published your DS.
 
 ```
-sysadm@cli:~$ dig DS grpX.<*lab_domain*>.te-labs.training 
+sysadm@cli:~$ dig DS grp7.<*lab_domain*>.te-labs.training 
 
-; <<>> DiG 9.16.1-Ubuntu <<>> DS grpX.<*lab_domain*>.te-labs.training
+; <<>> DiG 9.16.1-Ubuntu <<>> DS grp7.<*lab_domain*>.te-labs.training
 ;; global options: +cmd
 ;; Got answer:
 ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 57805
@@ -78,10 +78,10 @@ sysadm@cli:~$ dig DS grpX.<*lab_domain*>.te-labs.training
 ;; OPT PSEUDOSECTION:
 ; EDNS: version: 0, flags:; udp: 1232
 ;; QUESTION SECTION:
-;grpX.<*lab_domain*>.te-labs.training.      IN      DS
+;grp7.<*lab_domain*>.te-labs.training.      IN      DS
 
 ;; ANSWER SECTION:
-grpX.<*lab_domain*>.te-labs.training. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
+grp7.<*lab_domain*>.te-labs.training. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
 
 ;; Query time: 320 msec
 ;; SERVER: 9.9.9.9#53(9.9.9.9)

@@ -15,13 +15,13 @@ Previous version:-
 
 During this practice we are going to access the following equipments:
 
-* **grpX-cli** : client
-* **grpX-resolv1** & **grpX-resolv2** : recursive servers (resolvers)
+* **grp7-cli** : client
+* **grp7-resolv1** & **grp7-resolv2** : recursive servers (resolvers)
 
 
 ### Set up a BIND validating recursive server.
 
-We use the container "Resolv 1" (recursive server) [**grpX-resolv1**]. This container already has the BIND9 packages downloaded and installed.
+We use the container "Resolv 1" (recursive server) [**grp7-resolv1**]. This container already has the BIND9 packages downloaded and installed.
 
 Go to the /etc/bind directory:
 
@@ -100,32 +100,32 @@ You should get something similar to the below:
    CGroup: /system.slice/named.service
        └─849 /usr/sbin/named -f -u bind
 
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: **command channel listening on ::1#953**
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: managed-keys-zone: loaded serial 6
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: zone 0.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: zone 127.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: zone localhost/IN: loaded serial 2
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: zone 255.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: **all zones loaded**
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: **running**
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer>
-May 13 01:38:27 resolv1.grpX.<lab_domain>.te-labs.training named[849]: resolver priming query complete
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: **command channel listening on ::1#953**
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: managed-keys-zone: loaded serial 6
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: zone 0.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: zone 127.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: zone localhost/IN: loaded serial 2
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: zone 255.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: **all zones loaded**
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: **running**
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer>
+May 13 01:38:27 resolv1.grp7.<lab_domain>.te-labs.training named[849]: resolver priming query complete
 ```
 
 ### Test your new validating resolver
 
 Run the following commands and confirm if you receive the "ad" flag:
 
-1. dig SOA com. @100.100.X.67 
-2. dig SOA com. @100.100.X.67 +dnssec
-3. dig A www.icann.org @100.100.X.67
-4. dig NS icann.org @100.100.X.67
-5. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.67
-6. dig NS *grpX*.<*lab_domain*>.te-labs.training @100.100.X.67 +dnssec
-7. dig SOA *grpX*.<*lab_domain*>.te-labs.training @100.100.X.67
-8. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.130
-9. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.130 +multi
-10. dig SOA *grpX*.<*lab_domain*>.te-labs.training @100.100.X.131 +dnssec +multi
+1. dig SOA com. @100.100.7.67 
+2. dig SOA com. @100.100.7.67 +dnssec
+3. dig A www.icann.org @100.100.7.67
+4. dig NS icann.org @100.100.7.67
+5. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.67
+6. dig NS *grp7*.<*lab_domain*>.te-labs.training @100.100.7.67 +dnssec
+7. dig SOA *grp7*.<*lab_domain*>.te-labs.training @100.100.7.67
+8. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.130
+9. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.130 +multi
+10. dig SOA *grp7*.<*lab_domain*>.te-labs.training @100.100.7.131 +dnssec +multi
 
 Did you receive the "ad" flag for the last three dig queries ? Why ?
 
@@ -133,19 +133,19 @@ Now try the below:
 
 1. dig www.dnssec-failed.org @9.9.9.9
 
-2. dig www.dnssec-failed.org @100.100.X.67 
+2. dig www.dnssec-failed.org @100.100.7.67 
 
-3. dig www.dnssec-failed.org +dnssec @100.100.X.67
+3. dig www.dnssec-failed.org +dnssec @100.100.7.67
 
-4. dig www.dnssec-failed.org +dnssec +cd @100.100.X.67
+4. dig www.dnssec-failed.org +dnssec +cd @100.100.7.67
 
    
 
 ### Set your recursive resolver OS to use your local validating recursive resolver software.
-Still in **grpX-resolv1** server, edit the **/etc/resolv.conf** config file and replace whatever is there by the following only:
+Still in **grp7-resolv1** server, edit the **/etc/resolv.conf** config file and replace whatever is there by the following only:
 
 ```
-nameserver 100.100.X.67
+nameserver 100.100.7.67
 ```
 
 Save and exit. Then try the following queries:
@@ -154,12 +154,12 @@ Save and exit. Then try the following queries:
 2. dig SOA com. +dnssec
 3. dig A www.icann.org
 4. dig NS icann.org
-5. dig NS *grpX*.<*lab_domain*>.te-labs.training
-6. dig NS *grpX*.<*lab_domain*>.te-labs.training +dnssec
-7. dig SOA *grpX*.<*lab_domain*>.te-labs.training
-8. dig SOA *grpX*.<*lab_domain*>.te-labs.training +dnssec +multi
-9. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training
-10. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training +multi
+5. dig NS *grp7*.<*lab_domain*>.te-labs.training
+6. dig NS *grp7*.<*lab_domain*>.te-labs.training +dnssec
+7. dig SOA *grp7*.<*lab_domain*>.te-labs.training
+8. dig SOA *grp7*.<*lab_domain*>.te-labs.training +dnssec +multi
+9. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training
+10. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training +multi
 
 Did you get the "ad" flag in all the cases ?
 
@@ -167,7 +167,7 @@ Did you get the "ad" flag in all the cases ?
 
 ## Set up an Unbound recursive server
 
-Use the container "Resolv 2" (recursive server) [**grpX-resolv2**]. This container already has the UNBOUND packages downloaded and installed.
+Use the container "Resolv 2" (recursive server) [**grp7-resolv2**]. This container already has the UNBOUND packages downloaded and installed.
 
 Start by configuring UNBOUND. To do this, switch to the root user and edit **/etc/unbound/unbound.conf** config file:
 
@@ -240,49 +240,49 @@ Drop-In: /etc/systemd/system/service.d
 	Process: 571 ExecStartPre=/usr/lib/unbound/package-helper chroot_setup (code=exited, status=0/SUCCESS)
 	Process: 574 ExecStartPre=/usr/lib/unbound/package-helper root_trust_anchor_update (code=exited, status=0/SUCCESS)   Main PID: 578 (unbound)      Tasks: 1 (limit: 152822)     Memory: 7.8M     
 	CGroup: /system.slice/unbound.service             		└─578 /usr/sbin/unbound -d
-May 13 03:49:10 resolv2.grpX.<lab_domain>.te-labs.training unbound[178]: [178:0] info: [25%]=0 median[50%]=0 [75%]=0
-May 13 03:49:10 resolv2.grpX.<lab_domain>.te-labs.training unbound[178]: [178:0] info: lower(secs) upper(secs) recursions
-May 13 03:49:10 resolv2.grpX.<lab_domain>.te-labs.training unbound[178]: [178:0] info:    0.000000    0.000001 1
-May 13 03:49:11 resolv2.grpX.<lab_domain>.te-labs.training package-helper[577]: /var/lib/unbound/root.key has content
-May 13 03:49:11 resolv2.grpX.<lab_domain>.te-labs.training package-helper[577]: success: the anchor is ok
-May 13 03:49:11 resolv2.grpX.<lab_domain>.te-labs.training unbound[578]: [578:0] notice: init module 0: subnet
-May 13 03:49:11 resolv2.grpX.<lab_domain>.te-labs.training unbound[578]: [578:0] notice: init module 1: validator
-May 13 03:49:11 resolv2.grpX.<lab_domain>.te-labs.training unbound[578]: [578:0] notice: init module 2: iterator
-May 13 03:49:11 resolv2.grpX.<lab_domain>.te-labs.training unbound[578]: [578:0] info: start of service (unbound 1.9.4).
-May 13 03:49:11 resolv2.grpX.<lab_domain>.te-labs.training systemd[1]: Started Unbound DNS server.
+May 13 03:49:10 resolv2.grp7.<lab_domain>.te-labs.training unbound[178]: [178:0] info: [25%]=0 median[50%]=0 [75%]=0
+May 13 03:49:10 resolv2.grp7.<lab_domain>.te-labs.training unbound[178]: [178:0] info: lower(secs) upper(secs) recursions
+May 13 03:49:10 resolv2.grp7.<lab_domain>.te-labs.training unbound[178]: [178:0] info:    0.000000    0.000001 1
+May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training package-helper[577]: /var/lib/unbound/root.key has content
+May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training package-helper[577]: success: the anchor is ok
+May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training unbound[578]: [578:0] notice: init module 0: subnet
+May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training unbound[578]: [578:0] notice: init module 1: validator
+May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training unbound[578]: [578:0] notice: init module 2: iterator
+May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training unbound[578]: [578:0] info: start of service (unbound 1.9.4).
+May 13 03:49:11 resolv2.grp7.<lab_domain>.te-labs.training systemd[1]: Started Unbound DNS server.
 ```
 
 ### Test your new validating resolver
 
 Run the following commands and confirm if you receive the "ad" flag:
 
-1. dig SOA com. @100.100.X.68 
-2. dig SOA com. @100.100.X.68 +dnssec
-3. dig A www.icann.org @100.100.X.68
-4. dig NS icann.org @100.100.X.68
-5. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.68
-6. dig NS *grpX*.<*lab_domain*>.te-labs.training @100.100.X.68 +dnssec
-7. dig SOA *grpX*.<*lab_domain*>.te-labs.training @100.100.X.68
-8. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.130
-9. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.130 +multi
-10. dig SOA *grpX*.<*lab_domain*>.te-labs.training @100.100.X.131 +dnssec +multi
+1. dig SOA com. @100.100.7.68 
+2. dig SOA com. @100.100.7.68 +dnssec
+3. dig A www.icann.org @100.100.7.68
+4. dig NS icann.org @100.100.7.68
+5. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.68
+6. dig NS *grp7*.<*lab_domain*>.te-labs.training @100.100.7.68 +dnssec
+7. dig SOA *grp7*.<*lab_domain*>.te-labs.training @100.100.7.68
+8. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.130
+9. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.130 +multi
+10. dig SOA *grp7*.<*lab_domain*>.te-labs.training @100.100.7.131 +dnssec +multi
 
 Did you receive the "ad" flag for the last three dig queries ? Why ?
 
 Now try the below:
 
 1. dig www.dnssec-failed.org @9.9.9.9
-2. dig www.dnssec-failed.org @100.100.X.68 
-3. dig www.dnssec-failed.org +dnssec @100.100.X.68
-4. dig www.dnssec-failed.org +dnssec +cd @100.100.X.68
+2. dig www.dnssec-failed.org @100.100.7.68 
+3. dig www.dnssec-failed.org +dnssec @100.100.7.68
+4. dig www.dnssec-failed.org +dnssec +cd @100.100.7.68
 
 
 
 ### Set your recursive resolver OS to use your local validating recursive resolver software.
-Still in **grpX-resolv2** server, edit the **/etc/resolv.conf** config file and replace whatever is there by the following only:
+Still in **grp7-resolv2** server, edit the **/etc/resolv.conf** config file and replace whatever is there by the following only:
 
 ```
-nameserver 100.100.X.68
+nameserver 100.100.7.68
 ```
 
 Save and exit. Then try the following queries:
@@ -291,11 +291,11 @@ Save and exit. Then try the following queries:
 2. dig SOA com. +dnssec
 3. dig A www.icann.org
 4. dig NS icann.org
-5. dig NS *grpX*.<*lab_domain*>.te-labs.training
-6. dig NS *grpX*.<*lab_domain*>.te-labs.training +dnssec
-7. dig SOA *grpX*.<*lab_domain*>.te-labs.training
-8. dig SOA *grpX*.<*lab_domain*>.te-labs.training +dnssec +multi
-9. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training
-10. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training +multi
+5. dig NS *grp7*.<*lab_domain*>.te-labs.training
+6. dig NS *grp7*.<*lab_domain*>.te-labs.training +dnssec
+7. dig SOA *grp7*.<*lab_domain*>.te-labs.training
+8. dig SOA *grp7*.<*lab_domain*>.te-labs.training +dnssec +multi
+9. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training
+10. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training +multi
 
 Did you get the "ad" flag in all the cases ?

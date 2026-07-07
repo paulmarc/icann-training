@@ -15,7 +15,7 @@ Previous version: 2025032400
 
 <img src="https://github.com/yakanho/training/assets/54844453/d794aab6-720a-4802-86b5-6afea3032957" alt="lab_topology" style="zoom:50%;" />
 
-**<u>Lab Topology (Group X) </u>**
+**<u>Lab Topology (Group 7) </u>**
 
 ------
 
@@ -24,35 +24,35 @@ Previous version: 2025032400
 ```
   DEVICE NAME        IPv4 ADDRESS              IPv6 ADDRESS
 +--------------+-----------------------+-----------------------------+
-| grpX-cli     | 100.100.X.2 (eth0)    | fd89:59e0:X::2 (eth0)       |
+| grp7-cli     | 100.100.7.2 (eth0)    | fd89:59e0:7::2 (eth0)       |
 +--------------+-----------------------+-----------------------------+
-| grpX-ns1     | 100.100.X.130 (eth0)  | fd89:59e0:X:128::130 (eth0) |
+| grp7-ns1     | 100.100.7.130 (eth0)  | fd89:59e0:7:128::130 (eth0) |
 +--------------+-----------------------+-----------------------------+
-| grpX-ns2     | 100.100.X.131 (eth0)  | fd89:59e0:X:128::131 (eth0) |
+| grp7-ns2     | 100.100.7.131 (eth0)  | fd89:59e0:7:128::131 (eth0) |
 +--------------+-----------------------+-----------------------------+
-| grpX-resolv1 | 100.100.X.67 (eth0)   | fd89:59e0:X:64::67 (eth0)   |
+| grp7-resolv1 | 100.100.7.67 (eth0)   | fd89:59e0:7:64::67 (eth0)   |
 +--------------+-----------------------+-----------------------------+
-| grpX-resolv2 | 100.100.X.68 (eth0)   | fd89:59e0:X:64::68 (eth0)   |
+| grp7-resolv2 | 100.100.7.68 (eth0)   | fd89:59e0:7:64::68 (eth0)   |
 +--------------+-----------------------+-----------------------------+
-| grpX-rtr     | 100.64.1.X (eth0)     | fd89:59e0:X::1 (eth1)       |
-|              | 100.100.X.65 (eth2)   | fd89:59e0:X:64::1 (eth2)    |
-|              | 100.100.X.193 (eth4)  | fd89:59e0:X:192::1 (eth4)   |
-|              | 100.100.X.129 (eth3)  | fd89:59e0:X:128::1 (eth3)   |
-|              | 100.100.X.1 (eth1)    | fd89:59e0:0:1::X (eth0)     |
+| grp7-rtr     | 100.64.1.7 (eth0)     | fd89:59e0:7::1 (eth1)       |
+|              | 100.100.7.65 (eth2)   | fd89:59e0:7:64::1 (eth2)    |
+|              | 100.100.7.193 (eth4)  | fd89:59e0:7:192::1 (eth4)   |
+|              | 100.100.7.129 (eth3)  | fd89:59e0:7:128::1 (eth3)   |
+|              | 100.100.7.1 (eth1)    | fd89:59e0:0:1::7 (eth0)     |
 +--------------+-----------------------+-----------------------------+
-| grpX-soa     | 100.100.X.66 (eth0)   | fd89:59e0:X:64::66 (eth0)   |
+| grp7-soa     | 100.100.7.66 (eth0)   | fd89:59e0:7:64::66 (eth0)   |
 +--------------+-----------------------+-----------------------------+
 ```
 
 During this practice we are only going to access the following equipment:
 
-* **grpX-cli** : client
-* **grpX-soa** : hidden authoritative servers (primary)
-* **grpX-ns1** & **grpX-ns2** : secondary authoritative servers
+* **grp7-cli** : client
+* **grp7-soa** : hidden authoritative servers (primary)
+* **grp7-ns1** & **grp7-ns2** : secondary authoritative servers
 
 > [!IMPORTANT]
 >
-> In all this lab, be carefull to always replace ***X*** by your Group number in IP addresses, server name and any other place where required. Same for <*lab_domain*> to be replace by the domain name registered for the class.
+> In all this lab, be carefull to always replace ***7*** by your Group number in IP addresses, server name and any other place where required. Same for <*lab_domain*> to be replace by the domain name registered for the class.
 
 
 
@@ -60,16 +60,16 @@ During this practice we are only going to access the following equipment:
 
 ### Intro
 
-We are going to configure a hidden authoritative server and create the authoritative zone for your domain name *grpX*.<*lab_domain*>.te-labs.training.
+We are going to configure a hidden authoritative server and create the authoritative zone for your domain name *grp7*.<*lab_domain*>.te-labs.training.
 
 ### What we already know
 
 Our "parent" (<*lab_domain*>.te-labs.training) has already created the following in its own zone:
 
 ```shell
-; grpX
-grpX             NS          <lab_domain>.te-labs.training.
-; ---Placeholder for grpX DS record (DO NOT MANUALLY EDIT THIS LINE)---
+; grp7
+grp7             NS          <lab_domain>.te-labs.training.
+; ---Placeholder for grp7 DS record (DO NOT MANUALLY EDIT THIS LINE)---
 
 ```
 
@@ -77,24 +77,24 @@ Our zone configuration must be compatible with that.
 
 ### Setting the authoritative zone
 
-We use the container "SOA" (hidden primary authoritative) [**grpX-soa**]
+We use the container "SOA" (hidden primary authoritative) [**grp7-soa**]
 
 We go to the `/var/lib` directory, create a new folder for our zone files. Inside that new folder, we then create a new file for our domain zone data.
 
 ```
 $ sudo mkdir -p /var/lib/bind/zones
 $ cd /var/lib/bind/zones
-$ sudo touch db.grpX
+$ sudo touch db.grp7
 $ sudo chown -R bind:bind /var/lib/bind
 ```
 
-Then, update the db.grpX zone to look like the below:
+Then, update the db.grp7 zone to look like the below:
 
 ```
-; grpX 
+; grp7 
 
 $TTL    120
-@       IN      SOA     soa.grpX.<lab_domain>.te-labs.training. dnsadmin.grpX.<lab_domain>.te-labs.training. (                                            
+@       IN      SOA     soa.grp7.<lab_domain>.te-labs.training. dnsadmin.grp7.<lab_domain>.te-labs.training. (                                            
                               1         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
@@ -102,21 +102,21 @@ $TTL    120
                           86400 )       ; Negative Cache TTL
 ;
 
-; grpX 
+; grp7 
 @             NS           <lab_domain>.te-labs.training.
-@	     TXT	   "I AM LEARNING DNS AND IT IS FUN"
+@	     T7T	   "I AM LEARNING DNS AND IT IS FUN"
 
-ns1         A           100.100.X.130
-ns1         AAAA        fd89:59e0:X:128::130
-ns2         A           100.100.X.131
-ns2         AAAA        fd89:59e0:X:128::131
-soa			A			100.100.X.66
-soa 		AAAA		fd89:59e0:X:128::66
-resolv1		A			100.100.X.67
-resolv1		AAAA		fd89:59e0:X:128::67
-resolv2		A			100.100.X.68
-resolv2		AAAA		fd89:59e0:X:128::68
-www         A           100.100.X.130
+ns1         A           100.100.7.130
+ns1         AAAA        fd89:59e0:7:128::130
+ns2         A           100.100.7.131
+ns2         AAAA        fd89:59e0:7:128::131
+soa			A			100.100.7.66
+soa 		AAAA		fd89:59e0:7:128::66
+resolv1		A			100.100.7.67
+resolv1		AAAA		fd89:59e0:7:128::67
+resolv2		A			100.100.7.68
+resolv2		AAAA		fd89:59e0:7:128::68
+www         A           100.100.7.130
 ```
 
 You can add more records as you want.
@@ -131,15 +131,15 @@ You can add more records as you want.
 In the configuration file ***/etc/bind/named.conf.local*** , create a new "zone" statement as below:
 
 ```
-zone "grpX.<lab_domain>.te-labs.training" {
+zone "grp7.<lab_domain>.te-labs.training" {
 		type primary;
-		file "/var/lib/bind/zones/db.grpX";
+		file "/var/lib/bind/zones/db.grp7";
 		allow-transfer { any; };
 		also-notify {
-                100.100.X.130; 
-                100.100.X.131; 
-                fd89:59e0:X:128::130; 
-                fd89:59e0:X:128::131; 
+                100.100.7.130; 
+                100.100.7.131; 
+                fd89:59e0:7:128::130; 
+                fd89:59e0:7:128::131; 
         };
 }; 
 ```
@@ -168,16 +168,16 @@ root@soa:/var/lib$ sudo systemctl status bind9
      CGroup: /system.slice/named.service
              └─2944 /usr/sbin/named -f -u bind
 
-Oct 29 11:37:52 soa.grpX.<lab_domain>.te-labs.training named[2944]: zone grpX.<lab_domain>.te-labs.training/I>
-Oct 29 11:37:52 soa.grpX.<lab_domain>.te-labs.training named[2944]: all zones loaded
-Oct 29 11:37:52 soa.grpX.<lab_domain>.te-labs.training named[2944]: running
-Oct 29 11:37:52 soa.grpX.<lab_domain>.te-labs.training named[2944]: zone grpX.<lab_domain>.te-labs.training/I>
-Oct 29 11:37:53 soa.grpX.<lab_domain>.te-labs.training named[2944]: managed-keys-zone: Key 20326 fo>
-Oct 29 11:37:53 soa.grpX.<lab_domain>.te-labs.training named[2944]: resolver priming query complete
-Oct 29 11:37:53 soa.grpX.<lab_domain>.te-labs.training named[2944]: checkhints: b.root-servers.net/>
-Oct 29 11:37:53 soa.grpX.<lab_domain>.te-labs.training named[2944]: checkhints: b.root-servers.net/>
-Oct 29 11:37:53 soa.grpX.<lab_domain>.te-labs.training named[2944]: checkhints: b.root-servers.net/>
-Oct 29 11:37:53 soa.grpX.<lab_domain>.te-labs.training named[29
+Oct 29 11:37:52 soa.grp7.<lab_domain>.te-labs.training named[2944]: zone grp7.<lab_domain>.te-labs.training/I>
+Oct 29 11:37:52 soa.grp7.<lab_domain>.te-labs.training named[2944]: all zones loaded
+Oct 29 11:37:52 soa.grp7.<lab_domain>.te-labs.training named[2944]: running
+Oct 29 11:37:52 soa.grp7.<lab_domain>.te-labs.training named[2944]: zone grp7.<lab_domain>.te-labs.training/I>
+Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: managed-keys-zone: Key 20326 fo>
+Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: resolver priming query complete
+Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: checkhints: b.root-servers.net/>
+Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: checkhints: b.root-servers.net/>
+Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[2944]: checkhints: b.root-servers.net/>
+Oct 29 11:37:53 soa.grp7.<lab_domain>.te-labs.training named[29
 ...
 ```
 
@@ -186,8 +186,8 @@ Oct 29 11:37:53 soa.grpX.<lab_domain>.te-labs.training named[29
 Then, query your zone on the local server:
 
 ```
-root@soa:/var/lib$ dig @localhost soa grpX.<lab_domain>.te-labs.training.
-; <<>> DiG 9.16.1-Ubuntu <<>> @localhost soa grpX.<lab_domain>.te-labs.training.
+root@soa:/var/lib$ dig @localhost soa grp7.<lab_domain>.te-labs.training.
+; <<>> DiG 9.16.1-Ubuntu <<>> @localhost soa grp7.<lab_domain>.te-labs.training.
 ; (2 servers found)
 ;; global options: +cmd
 ;; Got answer:
@@ -198,10 +198,10 @@ root@soa:/var/lib$ dig @localhost soa grpX.<lab_domain>.te-labs.training.
 ; EDNS: version: 0, flags:; udp: 4096
 ; COOKIE: 270e2c46ed443c1c01000000609c59f04ba85015ff71998d (good)
 ;; QUESTION SECTION:
-;grpX.<lab_domain>.te-labs.training.        IN      SOA
+;grp7.<lab_domain>.te-labs.training.        IN      SOA
 
 ;; ANSWER SECTION:
-grpX.<lab_domain>.te-labs.training. 30 IN   SOA     grpX.<lab_domain>.te-labs.training. dnsadmin.<lab_domain>.te-labs.training. 1 604800 86400 2419200 86400
+grp7.<lab_domain>.te-labs.training. 30 IN   SOA     grp7.<lab_domain>.te-labs.training. dnsadmin.<lab_domain>.te-labs.training. 1 604800 86400 2419200 86400
 
 ;; Query time: 0 msec
 ;; SERVER: ::1#53(::1)
@@ -215,7 +215,7 @@ grpX.<lab_domain>.te-labs.training. 30 IN   SOA     grpX.<lab_domain>.te-labs.tr
 
 These servers are the ones that expose our zone publicly (so they will be open-to-all servers).
 
-#### Configure ns1 [**ns1.grpX**] server
+#### Configure ns1 [**ns1.grp7**] server
 
 **Server ns1 runs BIND** (from ISC)
 
@@ -223,7 +223,7 @@ Go to the `/var/lib` directory and create a file that will contain our zone file
 
 ```
 $ sudo mkdir -p /var/lib/bind/zones
-$ sudo touch /var/lib/bind/zones/db.grpX.secondary
+$ sudo touch /var/lib/bind/zones/db.grp7.secondary
 $ sudo chown -R bind:bind /var/lib/bind
 ```
 
@@ -234,12 +234,12 @@ To do this, in the ***/etc/bind/named.conf.local*** file, configure the followin
 // Do any local configuration here
 //
 
-zone "grpX.<lab_domain>.te-labs.training" {
+zone "grp7.<lab_domain>.te-labs.training" {
         type secondary;
-        file "/var/lib/bind/zones/db.grpX.secondary";
+        file "/var/lib/bind/zones/db.grp7.secondary";
         masters { 
-        100.100.X.66; 
-        fd89:59e0:X:64::66;
+        100.100.7.66; 
+        fd89:59e0:7:64::66;
     };
 };
 ```
@@ -272,21 +272,21 @@ $ sudo systemctl status bind9
      CGroup: /system.slice/named.service
              └─739 /usr/sbin/named -f -u bind
 
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: all zones loaded
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: running
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: zone grpX.<lab_domain>.te-labs.training/IN: Transfer started.
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: transfer of 'grpX.<lab_domain>.te-labs.training/IN' from 100.100.2.66#53: connec>
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: zone grpX.<lab_domain>.te-labs.training/IN: transferred serial 1
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: transfer of 'grpX.<lab_domain>.te-labs.training/IN' from 100.100.2.66#53: Transf>
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: transfer of 'grpX.<lab_domain>.te-labs.training/IN' from 100.100.2.66#53: Transf>
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: zone grpX.<lab_domain>.te-labs.training/IN: sending notifies (serial 1)
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer com>
-May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: resolver priming query complete
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: all zones loaded
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: running
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: zone grp7.<lab_domain>.te-labs.training/IN: Transfer started.
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: transfer of 'grp7.<lab_domain>.te-labs.training/IN' from 100.100.2.66#53: connec>
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: zone grp7.<lab_domain>.te-labs.training/IN: transferred serial 1
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: transfer of 'grp7.<lab_domain>.te-labs.training/IN' from 100.100.2.66#53: Transf>
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: transfer of 'grp7.<lab_domain>.te-labs.training/IN' from 100.100.2.66#53: Transf>
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: zone grp7.<lab_domain>.te-labs.training/IN: sending notifies (serial 1)
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer com>
+May 13 04:25:43 ns1.grp7.<lab_domain>.te-labs.training named[739]: resolver priming query complete
 ```
 
 
 
-#### Configure ns2 [**ns2.grpX**] server
+#### Configure ns2 [**ns2.grp7**] server
 
 **Server ns2 runs NSD** (from NLnet Labs)
 
@@ -315,7 +315,7 @@ include: "/etc/nsd/nsd.conf.d/*.conf"
 server:
     log-only-syslog: yes
     zonesdir: "/var/lib/nsd"
-    nsid: "ascii_grpX NSD nsid"
+    nsid: "ascii_grp7 NSD nsid"
     hide-version: no
     hide-identity: no
     cookie-secret: "71ff147d946b942ed66e608b64dc54c9"
@@ -323,16 +323,16 @@ server:
 
 pattern:
     name: "fromprimary"
-    allow-notify: 100.100.X.66 NOKEY
-    allow-notify: fd89:59e0:X:64::66 NOKEY
-    allow-notify: fd89:59e0:X::2 NOKEY
-    request-xfr: AXFR 100.100.X.66 NOKEY
-    request-xfr: AXFR fd89:59e0:X:64::66 NOKEY
-    request-xfr: AXFR fd89:59e0:X::2 NOKEY
+    allow-notify: 100.100.7.66 NOKEY
+    allow-notify: fd89:59e0:7:64::66 NOKEY
+    allow-notify: fd89:59e0:7::2 NOKEY
+    request-xfr: A7FR 100.100.7.66 NOKEY
+    request-xfr: A7FR fd89:59e0:7:64::66 NOKEY
+    request-xfr: A7FR fd89:59e0:7::2 NOKEY
 
 zone:
-    name: "grpX.mali.te-labs.training."
-    zonefile: "db.grpX.secondary"
+    name: "grp7.mali.te-labs.training."
+    zonefile: "db.grp7.secondary"
     include-pattern: "fromprimary"
 ```
 
@@ -364,12 +364,12 @@ $ sudo systemctl status nsd
              ├─639 /usr/sbin/nsd -d
              └─640 /usr/sbin/nsd -d
 
-May 13 05:02:35 ns2.grpX.<lab_domain>.te-labs.training systemd[1]: Starting Name Server Daemon...
-May 13 05:02:35 ns2.grpX.<lab_domain>.te-labs.training nsd[638]: nsd starting (NSD 4.1.26)
-May 13 05:02:35 ns2.grpX.<lab_domain>.te-labs.training nsd[638]: [2024-05-13 05:02:35.865] nsd[638]: notice: nsd starting (NSD 4.1.26)
-May 13 05:02:35 ns2.grpX.<lab_domain>.te-labs.training nsd[639]: nsd started (NSD 4.1.26), pid 638
-May 13 05:02:35 ns2.grpX.<lab_domain>.te-labs.training nsd[639]: [2024-05-13 05:02:35.922] nsd[639]: notice: nsd started (NSD 4.1.26), pid 638
-May 13 05:02:35 ns2.grpX.<lab_domain>.te-labs.training systemd[1]: Started Name Server Daemon.
+May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training systemd[1]: Starting Name Server Daemon...
+May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training nsd[638]: nsd starting (NSD 4.1.26)
+May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training nsd[638]: [2024-05-13 05:02:35.865] nsd[638]: notice: nsd starting (NSD 4.1.26)
+May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training nsd[639]: nsd started (NSD 4.1.26), pid 638
+May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training nsd[639]: [2024-05-13 05:02:35.922] nsd[639]: notice: nsd started (NSD 4.1.26), pid 638
+May 13 05:02:35 ns2.grp7.<lab_domain>.te-labs.training systemd[1]: Started Name Server Daemon.
 ```
 
 
@@ -378,10 +378,10 @@ May 13 05:02:35 ns2.grpX.<lab_domain>.te-labs.training systemd[1]: Started Name 
 
 We will now use *dig* tool to verify the zone configuration and propagation, then do the same for one or two other groups in the class and share comments. From your client, run the following dig queries. All should return **answer section** otherwise you must review your configurations before continiuing:
 
-1. dig soa *grpX*.<*lab_domain*>.te-labs.training. @100.100.X.66
-2. dig soa *grpX*.<*lab_domain*>.te-labs.training. @100.100.X.130
-3. dig soa *grpX*.<*lab_domain*>.te-labs.training. @100.100.X.131
-4. dig soa *grpX*.<*lab_domain*>.te-labs.training. @100.100.X.131 +short
-5. dig soa *grpX*.<*lab_domain*>.te-labs.training. @100.100.X.131 +multi
-6. dig NS *grpX*.<*lab_domain*>.te-labs.training. @100.100.X.130
-7. dig NS *grpX*.<*lab_domain*>.te-labs.training. @100.100.X.130 +multi
+1. dig soa *grp7*.<*lab_domain*>.te-labs.training. @100.100.7.66
+2. dig soa *grp7*.<*lab_domain*>.te-labs.training. @100.100.7.130
+3. dig soa *grp7*.<*lab_domain*>.te-labs.training. @100.100.7.131
+4. dig soa *grp7*.<*lab_domain*>.te-labs.training. @100.100.7.131 +short
+5. dig soa *grp7*.<*lab_domain*>.te-labs.training. @100.100.7.131 +multi
+6. dig NS *grp7*.<*lab_domain*>.te-labs.training. @100.100.7.130
+7. dig NS *grp7*.<*lab_domain*>.te-labs.training. @100.100.7.130 +multi

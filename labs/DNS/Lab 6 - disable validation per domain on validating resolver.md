@@ -15,8 +15,8 @@ Previous version:-
 
 During this practice we are going to access the following equipments:
 
-* **grpX-cli** : client
-* **grpX-resolv1** & **grpX-resolv2** : recursive servers (resolvers)
+* **grp7-cli** : client
+* **grp7-resolv1** & **grp7-resolv2** : recursive servers (resolvers)
 
 > [!NOTE]
 >
@@ -58,11 +58,11 @@ You can *dig* to confirm if validation is disabled for your excluded domain only
 
 Now try the below:
 
-1. dig www.dnssec-failed.org @100.100.X.67 
+1. dig www.dnssec-failed.org @100.100.7.67 
 
-3. dig www.dnssec-failed.org +dnssec @100.100.X.67
+3. dig www.dnssec-failed.org +dnssec @100.100.7.67
 
-4. dig www.dnssec-failed.org +dnssec +cd @100.100.X.67
+4. dig www.dnssec-failed.org +dnssec +cd @100.100.7.67
 
    
 

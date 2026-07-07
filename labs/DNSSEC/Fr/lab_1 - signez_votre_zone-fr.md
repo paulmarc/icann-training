@@ -13,7 +13,7 @@ Version antérieure:-
 
 ------
 
-Pour ce lab, vous utiliserez le conteneur "SOA" (autoritatif primaire) [grpX-soa].
+Pour ce lab, vous utiliserez le conteneur "SOA" (autoritatif primaire) [grp7-soa].
 
 ## Créez le répertoire qui abritera vos clés DNSSEC
 
@@ -29,11 +29,11 @@ $ sudo chown -R bind:bind /var/lib/bind/keys
 Le fichier de configuration  `/etc/bind/named.conf.local` comporte déjà des instructions ayant permis de charger votre zone. A présent, vous devez mettre à jour cette configuration en ajoutant les instructions de signature automatique de zone par BIND. La nouvelle configuration pour votre zone devrait ressembler à celle-ci : 
 
 ```
-zone "grpX.<lab_domain>.te-labs.training" {
+zone "grp7.<lab_domain>.te-labs.training" {
 	type primary;
-	file "/var/lib/bind/zones/db.grpX";
+	file "/var/lib/bind/zones/db.grp7";
 	allow-transfer { any; };
-	also-notify {100.100.X.130; 100.100.X.131; };
+	also-notify {100.100.7.130; 100.100.7.131; };
 	key-directory "/var/lib/bind/keys"; 				# nouvelle instruction
 	inline-signing yes;									# nouvelle instruction
 	dnssec-policy NotForProduction;						# nouvelle instruction
@@ -93,7 +93,7 @@ Utilisez la commande  `rndc dnssec -status ZONE ` pour confirmer si BIND a effec
 
 
 ```
-$ sudo rndc dnssec -status grpX.<lab_domain>.te-labs.training
+$ sudo rndc dnssec -status grp7.<lab_domain>.te-labs.training
 dnssec-policy: NotForProduction
 current time:  Sun May 17 17:52:38 2026
 
@@ -123,7 +123,7 @@ key: 42330 (ECDSAP256SHA256), KSK
 Auparavant, nous utilisions la commande  `rndc signing -list ZONE ` pour confirmer la signature de zone par BIND.
 
 ```
-$ sudo rndc signing -list grpX.<lab_domain>.te-labs.training
+$ sudo rndc signing -list grp7.<lab_domain>.te-labs.training
 Done signing with key 8731/ECDSAP256SHA256
 Done signing with key 42330/ECDSAP256SHA256
 ```
@@ -152,13 +152,13 @@ Utilisez votre compagnon  ***dig***  pour interroger la zone et obtenir les enre
 
 **QUESTION**: examinez les commandes ci-dessous et dites si vous pensez obtenir le drapeau (flag) "**ad**" dans les réponses qu'elles devraient engendrer? Pourquoi ?
 
-1. dig SOA *grpX*.<*lab_domain*>.te-labs.training @100.100.X.66
-2. dig SOA *grpX*.<*lab_domain*>.te-labs.training @100.100.X.66 +dnssec
-3. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.66
-4. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.66 +dnssec +multi
-5. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.130
-6. dig DNSKEY *grpX*.<*lab_domain*>.te-labs.training @100.100.X.130 +dnssec +multi
-7. dig SOA *grpX*.<*lab_domain*>.te-labs.training @100.100.X.130 +dnssec +multi
+1. dig SOA *grp7*.<*lab_domain*>.te-labs.training @100.100.7.66
+2. dig SOA *grp7*.<*lab_domain*>.te-labs.training @100.100.7.66 +dnssec
+3. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.66
+4. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.66 +dnssec +multi
+5. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.130
+6. dig DNSKEY *grp7*.<*lab_domain*>.te-labs.training @100.100.7.130 +dnssec +multi
+7. dig SOA *grp7*.<*lab_domain*>.te-labs.training @100.100.7.130 +dnssec +multi
 
 
 

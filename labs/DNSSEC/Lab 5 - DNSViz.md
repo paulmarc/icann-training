@@ -16,7 +16,7 @@ Previous version:-
 
 We assume that:
 
-1. your zone grpX.<*lab_domain*>.te-labs.training. is DNSSEC signed 
+1. your zone grp7.<*lab_domain*>.te-labs.training. is DNSSEC signed 
 2. A DS RRSet has been uploaded to the class domain authoritative nameserver, and is published in the workshop <**lab_domain**> zone.
 3. Your recursive resolvers resolv1 and resolv2 are configured and DNSSEC validating (lab DNSSEC validation).
 4. Your recursive resolvers (resolv1 and resolv2) software are configured to use themselves as resolvers (in /etc/resolv.conf)
@@ -30,13 +30,13 @@ We assume that:
 Before you continue, check the following in any of your two recursive resolvers:
 
 ```
-$ dig grpX.<*lab_domain*>.te-labs.training SOA
+$ dig grp7.<*lab_domain*>.te-labs.training SOA
 ```
 returns:
 
 - a correct "ANSWER"
 - "AD" flag present 
-- and SERVER should be the localhost (::1 or 100.100.X.67 or 100.100.X.68).
+- and SERVER should be the localhost (::1 or 100.100.7.67 or 100.100.7.68).
 
 
 
@@ -60,7 +60,7 @@ root@resolv1:~# apt-get install dnsviz
 Run dnsviz against your domain
 
 ```
-root@resolv1:~# dnsviz probe grpX.<lab-domain>.te-labs.training | dnsviz graph -Tpng -O
+root@resolv1:~# dnsviz probe grp7.<lab-domain>.te-labs.training | dnsviz graph -Tpng -O
 ```
 
 Inform your trainer who will download the file and open it in a graphical environment.
@@ -70,19 +70,19 @@ Alternatively, you may want to download and open this file on your own personal 
 Upload the file to the cloud 
 
 ```
-root@resolv1:~# curl -F "file=@grpX.<lab-domain>.te-labs.training.png" https://file.io
+root@resolv1:~# curl -F "file=@grp7.<lab-domain>.te-labs.training.png" https://file.io
 ```
 
 The expected output is 
 
 ```
-root@resolv1:~# curl -F "file=@grpX.<lab-domain>.te-labs.training.png" https://file.io
+root@resolv1:~# curl -F "file=@grp7.<lab-domain>.te-labs.training.png" https://file.io
 {"success":true,"status":200,"id":"--------------------------------",
-"key":"XXXXXXXXXXXXXXXXXXX",
+"key":"7777777777777777777",
 "path":"/",
 "nodeType":"file",
-"name":"grpX.<lab-domain>.te-labs.training.png",
-"title":null,"description":null,"size":144179,"link":"https://file.io/XXXXXXXXXXXXXXXXXXX",
+"name":"grp7.<lab-domain>.te-labs.training.png",
+"title":null,"description":null,"size":144179,"link":"https://file.io/7777777777777777777",
 "private":false,"expires":"2024-09-18T09:05:27.433Z",
 "downloads":0,"maxDownloads":1,"autoDelete":true,"planId":0,"screeningStatus":"pending",
 "mimeType":"image/png",
